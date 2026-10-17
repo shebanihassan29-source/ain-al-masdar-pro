@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex,nofollow">
+<title>لوحة الإدارة — عين المصدر PRO</title>
+<link rel="stylesheet" href="/static/style.css?v=2">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><span aria-hidden="true">🛡️</span> لوحة الإدارة <small>ADMIN</small></div>
+    <button class="btn ghost sm hidden" id="logout" type="button">خروج</button>
+  </header>
+
+  <div class="card narrow" id="keyCard">
+    <h2>مفتاح الإدارة</h2>
+    <form id="keyForm"><label for="key" class="sr-only">مفتاح الإدارة</label>
+      <input id="key" type="password" autocomplete="off" required placeholder="ADMIN_KEY">
+      <button class="btn full" type="submit">دخول</button></form>
+    <div class="msg" id="keyMsg" role="alert"></div>
+  </div>
+
+  <div id="panel" class="hidden">
+    <div class="msg" id="topMsg" role="alert"></div>
+
+    <div class="card mb18">
+      <div class="row">
+        <h2 class="m0">طلبات الدفع</h2>
+        <div>
+          <label for="payFilter" class="sr-only">تصفية الطلبات</label>
+          <select id="payFilter" class="inline-field">
+            <option value="pending">المعلّقة</option><option value="approved">المقبولة</option>
+            <option value="rejected">المرفوضة</option><option value="">الكل</option>
+          </select>
+          <label for="days" class="sr-only">عدد أيام الاشتراك عند القبول</label>
+          <input id="days" class="inline-field w70" type="number" min="1" max="366" placeholder="أيام" title="أيام القبول (فارغ = الافتراضي)">
+          <button class="btn ghost sm" id="reload" type="button">تحديث</button>
+        </div>
+      </div>
+      <p class="small">حقل «أيام» يحدّد مدة الاشتراك الممنوحة عند القبول؛ اتركه فارغًا لاستخدام المدة الافتراضية.</p>
+      <div class="scroll-x"><table>
+        <caption class="sr-only">طلبات الدفع</caption>
+        <thead><tr><th scope="col">#</th><th scope="col">المشترك</th><th scope="col">الطريقة</th><th scope="col">المرجع / الملاحظة</th><th scope="col">المبلغ</th><th scope="col">التاريخ</th><th scope="col">الحالة / الإجراء</th></tr></thead>
+        <tbody id="payBody"></tbody></table></div>
+      <p class="small" id="payEmpty">لا توجد طلبات.</p>
+    </div>
+
+    <div class="card mb18">
+      <div class="row">
+        <h2 class="m0">المشتركون</h2>
+        <div><label for="userSearch" class="sr-only">بحث في المشتركين</label>
+        <input id="userSearch" class="inline-field w180" type="search" placeholder="بحث بالبريد أو الاسم"></div>
+      </div>
+      <div class="copybox hidden mt14" id="linkBox" tabindex="0"></div>
+      <p class="small hidden" id="linkNote">رابط استعادة لمرة واحدة، صالح ساعة. أرسله للمشترك (واتساب مثلًا) ولا تنشره.</p>
+      <div class="scroll-x"><table>
+        <caption class="sr-only">المشتركون</caption>
+        <thead><tr><th scope="col">#</th><th scope="col">البريد</th><th scope="col">الاسم / المؤسسة</th><th scope="col">الاشتراك</th><th scope="col">إجراءات</th></tr></thead>
+        <tbody id="userBody"></tbody></table></div>
+    </div>
+
+    <div class="card">
+      <h2>سجل التدقيق (آخر 100)</h2>
+      <div class="scroll-x"><table>
+        <caption class="sr-only">سجل إجراءات الإدارة</caption>
+        <thead><tr><th scope="col">الوقت</th><th scope="col">الإجراء</th><th scope="col">التفاصيل</th></tr></thead>
+        <tbody id="auditBody"></tbody></table></div>
+    </div>
+  </div>
+</div>
+<script src="/static/admin.js?v=2"></script>
+</body>
+</html>

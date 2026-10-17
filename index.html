@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<title>عين المصدر PRO — النسخة الاحترافية للبحث العلمي</title>
+<link rel="stylesheet" href="/static/style.css?v=2">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><span aria-hidden="true">📚</span> عين المصدر <small>PRO</small></div>
+    <a class="btn ghost hidden" id="freeLink" target="_blank" rel="noopener">النسخة المجانية</a>
+  </header>
+
+  <section class="hero">
+    <h1>ارتقِ ببحثك العلمي إلى مستوى احترافي</h1>
+    <p>كل ما في النسخة المجانية، مضافًا إليه ذكاء اصطناعي جاهز بلا مفاتيح، ومكتبة سحابية تتبعك على أجهزتك، وأدوات تكتب معك مراجعة الأدبيات.</p>
+    <div class="price"><b id="price">30</b> <span id="currency">د.ل</span> / شهريًا</div>
+    <div class="small" id="trialNote"></div>
+  </section>
+
+  <div class="notice hidden" id="needNotice" role="status"></div>
+  <div class="msg" id="globalMsg" role="alert"></div>
+
+  <div class="grid">
+    <div>
+      <div class="card">
+        <h2>ما الذي تحصل عليه؟</h2>
+        <ul class="feat">
+          <li><div class="ic" aria-hidden="true">✨</div><div><b>ذكاء اصطناعي مدمج بلا مفاتيح</b><span class="d">ترجمة الاستعلام العربي تلقائيًا، وملخصات، وفجوات بحثية، دون أن تنشئ أي حساب أو مفتاح خارجي.</span></div></li>
+          <li><div class="ic" aria-hidden="true">📝</div><div><b>مسودة مراجعة أدبيات</b><span class="d">تُنشأ من مراجعك المحفوظة لتكون نقطة بداية لفصلك النظري.</span></div></li>
+          <li><div class="ic" aria-hidden="true">☁️</div><div><b>مكتبة سحابية متزامنة</b><span class="d">مجموعاتك وملاحظاتك محفوظة في حسابك وتظهر على أي جهاز، مع حفظ نسخ احتياطية من آخر تعديلاتها.</span></div></li>
+          <li><div class="ic" aria-hidden="true">🗂️</div><div><b>ملاحظات ذكية لكل المراجع بضغطة</b><span class="d">شرح موجز لأهمية كل مرجع محفوظ لبناء ببليوغرافيا مشروحة.</span></div></li>
+          <li><div class="ic" aria-hidden="true">🎓</div><div><b>ترويسة باسمك ومؤسستك</b><span class="d">تخرج تقاريرك المصدَّرة (Word وPDF) بلا شعارات جهات أخرى، وباسمك ومؤسستك.</span></div></li>
+          <li><div class="ic" aria-hidden="true">🚀</div><div><b>تحديثات مستمرة</b><span class="d">تصلك الميزات الجديدة تلقائيًا طوال مدة اشتراكك.</span></div></li>
+        </ul>
+        <p class="small mt14">الحدّ اليومي للذكاء الاصطناعي: <span id="aiLimit">40</span> طلبًا لكل مشترك.</p>
+      </div>
+
+      <div class="card">
+        <h2>المجاني مقابل PRO</h2>
+        <div class="scroll-x">
+        <table class="cmp">
+          <caption class="sr-only">مقارنة بين النسخة المجانية والنسخة الاحترافية</caption>
+          <thead><tr><th scope="col">الميزة</th><th scope="col">مجاني</th><th scope="col">PRO</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">البحث في المصادر العلمية</th><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><th scope="row">التوثيق والتصدير</th><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><th scope="row">مكتبة على جهازك</th><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><th scope="row">ذكاء اصطناعي بلا مفاتيح</th><td class="no">بمفتاحك الخاص</td><td class="yes">✓ مدمج</td></tr>
+            <tr><th scope="row">مكتبة سحابية بين الأجهزة</th><td class="no">—</td><td class="yes">✓</td></tr>
+            <tr><th scope="row">مسودة مراجعة الأدبيات</th><td class="no">—</td><td class="yes">✓</td></tr>
+            <tr><th scope="row">ملاحظات لكل المراجع</th><td class="no">—</td><td class="yes">✓</td></tr>
+            <tr><th scope="row">ترويسة باسمك ومؤسستك</th><td class="no">—</td><td class="yes">✓</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>أسئلة شائعة</h2>
+        <details class="faq"><summary>هل يعمل على الجوال؟</summary><p>نعم، يعمل من متصفح الهاتف أو الحاسوب أو اللوح، بالحساب نفسه.</p></details>
+        <details class="faq"><summary>كيف أدفع؟</summary><p>تدفع خارج المنصة بإحدى الطرق المعروضة في صفحة حسابك، ثم تُدخل رقم العملية وتاريخها. يتحقق فريقنا من الدفع ويفعّل اشتراكك يدويًا، وعادةً خلال ساعات قليلة.</p></details>
+        <details class="faq"><summary>ماذا يحدث لمكتبتي إن انتهى الاشتراك؟</summary><p>تبقى محفوظة في حسابك ولا تُحذف، وتتوقف المزامنة والذكاء الاصطناعي حتى تجدّد. تعود كل الميزات بمجرد التجديد.</p></details>
+        <details class="faq"><summary>هل بياناتي خاصة؟</summary><p>مكتبتك مرتبطة بحسابك وحده. أما نصوص طلبات الذكاء الاصطناعي فتُرسل إلى مزوّد الخدمة لتوليد الرد. التفاصيل في <a href="/privacy">سياسة الخصوصية</a>.</p></details>
+        <details class="faq"><summary>نسيت كلمة المرور، ماذا أفعل؟</summary><p>اضغط «نسيت كلمة المرور؟» في نموذج الدخول وتواصل معنا؛ نرسل لك رابطًا صالحًا لمدة ساعة واحدة لتعيين كلمة جديدة.</p></details>
+        <details class="faq"><summary>هل أستطيع تصدير بياناتي أو حذف حسابي؟</summary><p>نعم، من بطاقة «بياناتي» في صفحة حسابك بعد تسجيل الدخول.</p></details>
+      </div>
+    </div>
+
+    <div>
+      <div class="card hidden" id="resetCard">
+        <h2>تعيين كلمة مرور جديدة</h2>
+        <form id="resetForm" autocomplete="off">
+          <label for="rPass">كلمة المرور الجديدة (8 أحرف على الأقل)</label>
+          <input id="rPass" type="password" required minlength="8" maxlength="72" autocomplete="new-password">
+          <button class="btn full" type="submit">حفظ كلمة المرور</button>
+        </form>
+        <div class="msg" id="resetMsg" role="alert"></div>
+      </div>
+
+      <div class="card" id="authCard">
+        <div class="tabs" role="tablist"><button id="tabLogin" class="on" type="button" role="tab" aria-selected="true">تسجيل الدخول</button><button id="tabSignup" type="button" role="tab" aria-selected="false">حساب جديد</button></div>
+        <form id="loginForm" autocomplete="on">
+          <label for="lEmail">البريد الإلكتروني</label><input id="lEmail" type="email" required autocomplete="email">
+          <label for="lPass">كلمة المرور</label>
+          <div class="field-row"><input id="lPass" type="password" required autocomplete="current-password"><button class="show-pass" type="button" data-show="lPass">إظهار</button></div>
+          <button class="btn full" type="submit">دخول</button>
+          <p class="small mt8"><button class="linklike" type="button" id="forgotBtn">نسيت كلمة المرور؟</button></p>
+          <div class="pay-box mt8 hidden" id="forgotBox">لاستعادة كلمة المرور تواصل مع الإدارة وأرسل بريدك المسجَّل، وسيصلك رابط تعيين صالح لمدة ساعة واحدة.<br><span id="contactLine"></span></div>
+        </form>
+        <form id="signupForm" class="hidden" autocomplete="on">
+          <label for="sName">الاسم</label><input id="sName" type="text" maxlength="100" autocomplete="name">
+          <label for="sInst">الجامعة / المؤسسة (تظهر في ترويسة تقاريرك)</label><input id="sInst" type="text" maxlength="150">
+          <label for="sEmail">البريد الإلكتروني</label><input id="sEmail" type="email" required autocomplete="email">
+          <label for="sPass">كلمة المرور (8 أحرف على الأقل)</label>
+          <div class="field-row"><input id="sPass" type="password" required minlength="8" maxlength="72" autocomplete="new-password"><button class="show-pass" type="button" data-show="sPass">إظهار</button></div>
+          <button class="btn full" type="submit">إنشاء الحساب</button>
+          <p class="small mt8">بإنشاء الحساب فإنك توافق على <a href="/terms">الشروط</a> و<a href="/privacy">سياسة الخصوصية</a>.</p>
+        </form>
+        <div class="msg" id="authMsg" role="alert"></div>
+      </div>
+
+      <div class="card hidden" id="accountCard">
+        <div class="row"><h2 class="m0" id="hello"></h2><span class="badge free" id="statusBadge"></span></div>
+        <p class="small" id="statusLine"></p>
+        <a class="btn full gold hidden" id="openApp" href="/app">افتح المنصة الاحترافية ←</a>
+
+        <div id="payBlock" class="hidden">
+          <h2 class="mt18">اشتراك / تجديد</h2>
+          <div class="pay-box" id="payInstr"></div>
+          <form id="payForm">
+            <label for="pMethod">طريقة الدفع</label>
+            <select id="pMethod"><option>تحويل مصرفي</option><option>رصيد / محفظة إلكترونية</option><option>نقدًا</option><option>أخرى</option></select>
+            <label for="pRef">رقم العملية أو اسم المحوِّل</label><input id="pRef" type="text" required minlength="3" maxlength="120">
+            <label for="pDate">تاريخ التحويل</label><input id="pDate" type="date">
+            <div id="pPlaceBox" class="hidden"><label for="pPlace">أين سلّمت المبلغ نقدًا؟</label><input id="pPlace" type="text" maxlength="80"></div>
+            <label for="pNote">ملاحظة (اختياري)</label><input id="pNote" type="text" maxlength="150">
+            <button class="btn full" type="submit">إرسال طلب التفعيل</button>
+          </form>
+          <div class="msg" id="payMsg" role="alert"></div>
+        </div>
+
+        <div id="reqBlock" class="hidden mt16">
+          <h2>طلباتي</h2>
+          <div class="scroll-x"><table><caption class="sr-only">طلبات الدفع السابقة</caption><thead><tr><th scope="col">التاريخ</th><th scope="col">الطريقة</th><th scope="col">المرجع</th><th scope="col">الحالة</th></tr></thead><tbody id="reqBody"></tbody></table></div>
+        </div>
+
+        <details class="faq mt16" id="dataBox">
+          <summary>بياناتي وحسابي</summary>
+          <p><a class="btn ghost sm" href="/api/me/export" download>تنزيل نسخة من بياناتي (JSON)</a></p>
+          <form id="deleteForm" autocomplete="off">
+            <label for="dPass">لحذف حسابك نهائيًا أدخل كلمة المرور</label>
+            <input id="dPass" type="password" required autocomplete="current-password">
+            <button class="btn danger sm mt8" type="submit">حذف حسابي نهائيًا</button>
+          </form>
+          <div class="msg" id="delMsg" role="alert"></div>
+        </details>
+
+        <div class="row mt18">
+          <button class="btn ghost" id="logoutBtn" type="button">تسجيل الخروج</button>
+          <button class="btn ghost" id="logoutAllBtn" type="button">خروج من كل الأجهزة</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    فكرة وتصميم: د. حسن الشيباني — عين المصدر © <span id="year">2026</span><br>
+    <span class="small">التفعيل يتم يدويًا بعد التحقق من الدفع، وعادةً خلال ساعات قليلة.</span><br>
+    <span class="small"><a href="/terms">الشروط</a> · <a href="/privacy">الخصوصية</a></span>
+  </footer>
+</div>
+<script src="/static/account.js?v=2"></script>
+</body>
+</html>
