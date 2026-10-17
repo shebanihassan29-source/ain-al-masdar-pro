@@ -4,7 +4,7 @@ services:
     name: ain-al-masdar-pro
     runtime: node
     plan: free                 # free instances sleep after ~15 min idle (first request then takes a while)
-    buildCommand: node organize.js && npm ci   # organize.js puts flat-uploaded files into their folders
+    buildCommand: npm ci
     startCommand: node server.js
     healthCheckPath: /healthz
     envVars:

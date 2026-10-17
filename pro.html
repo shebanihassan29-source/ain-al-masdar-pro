@@ -1,0 +1,2947 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<!--AM_LICENSEE-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عين المصدر PRO | Ain Al-Masdar PRO — منصة البحث عن المصادر والمراجع العلمية</title>
+<link rel="stylesheet" href="/static/fonts.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<style>
+:root {
+  --bg: #f4f7fb;
+  --bg2: #ffffff;
+  --bg3: #eef2f8;
+  --text: #15202b;
+  --text2: #5b6b7c;
+  --border: #dfe6ef;
+  --primary: #0e7490;
+  --primary2: #0b5c74;
+  --accent: #d97706;
+  --accent2: #b45309;
+  --ok: #059669;
+  --warn: #dc2626;
+  --shadow: 0 6px 24px rgba(15, 40, 70, .08);
+  --radius: 14px;
+  --font: 'Cairo', 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+[data-theme="dark"] {
+  --bg: #0b1220;
+  --bg2: #111c2e;
+  --bg3: #16233a;
+  --text: #e8eef6;
+  --text2: #9db0c5;
+  --border: #233550;
+  --primary: #22b3d3;
+  --primary2: #1c93b0;
+  --accent: #f0a63d;
+  --accent2: #f5b95c;
+  --ok: #34d399;
+  --warn: #f87171;
+  --shadow: 0 6px 24px rgba(0, 0, 0, .35);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.hidden { display: none !important; }
+html[dir="ltr"] body { text-align: left; }
+html, body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+html[dir="ltr"] .brand-name, html[dir="ltr"] .hero h1 { font-family: 'Segoe UI', 'Cairo', Tahoma, sans-serif; }
+
+/* Top bar */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: linear-gradient(135deg, #0b4256, #0e7490 55%, #155e75);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,.18);
+}
+.topbar-inner {
+  max-width: 1240px; margin: 0 auto; padding: 10px 18px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.header-logos { display: flex; align-items: center; gap: 8px; }
+.header-logos img { height: 40px; width: auto; object-fit: contain; }
+@media (max-width: 720px) { .header-logos img { height: 30px; } }
+.footer-logos { display: flex; justify-content: center; align-items: center; gap: 14px; margin-bottom: 10px; }
+.footer-logos img { height: 46px; width: auto; object-fit: contain; }
+.letterhead { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 2px solid #0e7490; }
+.letterhead img { height: 60px; width: auto; object-fit: contain; }
+.letterhead-txt { text-align: center; font-size: 12.5px; color: #333; line-height: 1.7; }
+.letterhead-txt b { font-size: 14px; display: block; }
+
+.brand-logo { font-size: 30px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.3)); }
+.brand-name { font-size: 20px; font-weight: 800; }
+.brand-sub { font-size: 11px; opacity: .85; letter-spacing: 1px; text-transform: uppercase; }
+.top-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.ico-btn {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.14); color: #fff;
+  border: 1px solid rgba(255,255,255,.22); border-radius: 10px;
+  padding: 7px 12px; cursor: pointer; font-family: var(--font);
+  font-size: 13px; transition: background .2s;
+}
+.ico-btn:hover { background: rgba(255,255,255,.26); }
+[data-theme="dark"] .topbar { background: linear-gradient(135deg, #081a2c, #0e3a4e 55%, #07303f); }
+
+/* Layout */
+.container { max-width: 1240px; margin: 0 auto; padding: 22px 18px 60px; }
+
+/* Hero */
+.hero { text-align: center; padding: 26px 0 14px; }
+.hero-badge {
+  display: inline-block; background: rgba(217,119,6,.12); color: var(--accent2);
+  border: 1px solid rgba(217,119,6,.3); border-radius: 40px;
+  padding: 5px 16px; font-size: 12.5px; margin-bottom: 14px; font-weight: 700;
+}
+.hero h1 { font-size: clamp(22px, 3.4vw, 34px); font-weight: 800; line-height: 1.35; }
+.hero-sub { color: var(--text2); max-width: 780px; margin: 10px auto 0; font-size: 14.5px; }
+
+.search-box {
+  max-width: 860px; margin: 22px auto 0;
+  background: var(--bg2); border: 1.5px solid var(--border);
+  border-radius: 16px; padding: 10px;
+  box-shadow: var(--shadow);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.search-input {
+  width: 100%; border: none; outline: none;
+  background: transparent; color: var(--text);
+  font-family: var(--font); font-size: 16px; padding: 6px 10px;
+}
+.search-input::placeholder { color: var(--text2); }
+.search-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.year-sel, .sort-sel {
+  border: 1px solid var(--border); background: var(--bg3); color: var(--text);
+  border-radius: 10px; padding: 8px 10px; font-family: var(--font); font-size: 14px;
+  cursor: pointer; max-width: 120px;
+}
+.dash { color: var(--text2); }
+.btn-search {
+  flex: 1; min-width: 130px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff; border: none; border-radius: 12px;
+  padding: 10px 20px; font-family: var(--font); font-size: 16px; font-weight: 800;
+  cursor: pointer; transition: transform .12s, box-shadow .2s;
+  box-shadow: 0 4px 14px rgba(217,119,6,.35);
+}
+.btn-search:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(217,119,6,.45); }
+.btn-search:active { transform: translateY(0); }
+
+.suggest-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px; }
+.suggest-chips .chip {
+  border: 1px solid var(--border); background: var(--bg2); color: var(--text2);
+  border-radius: 40px; padding: 6px 14px; font-size: 13px; cursor: pointer;
+  font-family: var(--font); transition: all .15s;
+}
+.suggest-chips .chip:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Sources panel */
+.sources-panel { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin-top: 22px; box-shadow: var(--shadow); }
+.sources-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.sources-head h2 { font-size: 17px; }
+.sources-head .hint { color: var(--text2); font-size: 12.5px; flex: 1 1 260px; }
+.src-btns { display: flex; gap: 8px; }
+.mini {
+  background: var(--bg3); border: 1px solid var(--border); color: var(--text);
+  border-radius: 9px; padding: 6px 12px; font-family: var(--font); font-size: 13px; cursor: pointer;
+}
+.mini:hover { border-color: var(--primary); }
+
+.sources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 10px; }
+.src-chip {
+  display: flex; align-items: center; gap: 10px;
+  border: 1.5px solid var(--border); border-radius: 12px; padding: 10px 12px;
+  background: var(--bg3); cursor: pointer; transition: all .15s; user-select: none;
+}
+.src-chip:hover { border-color: var(--primary); }
+.src-chip.on { border-color: var(--primary); background: rgba(14,116,144,.08); box-shadow: inset 0 0 0 1px var(--primary); }
+.src-chip.off { opacity: .62; }
+.src-chip .sc-logo { font-size: 22px; }
+.src-chip .sc-name { font-size: 13.5px; font-weight: 700; color: var(--text); }
+.src-chip .sc-meta { font-size: 10.5px; color: var(--text2); display: block; }
+.src-chip .sc-box {
+  width: 18px; height: 18px; border-radius: 5px; border: 2px solid var(--text2);
+  flex-shrink: 0; display: grid; place-items: center; font-size: 12px; color: #fff;
+}
+.src-chip.on .sc-box { background: var(--primary); border-color: var(--primary); }
+.src-chip.on .sc-box::after { content: "✓"; }
+
+.core-notice { background: rgba(217,119,6,.1); border: 1px solid rgba(217,119,6,.35); color: var(--accent2); border-radius: 10px; padding: 8px 14px; margin-top: 12px; font-size: 13px; }
+
+/* Results */
+.results-section { margin-top: 26px; }
+.status-bar {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 12px 16px; margin-bottom: 12px; font-size: 14px; box-shadow: var(--shadow);
+}
+.status-msg { font-weight: 700; }
+.per-source { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--text2); }
+.per-source .ps { display: flex; align-items: center; gap: 5px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); display: inline-block; }
+.dot.bad { background: var(--warn); }
+.dot.zero { background: #94a3b8; }
+
+.results-toolbar {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+  margin-bottom: 14px;
+}
+.toolbar-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.toolbar-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.res-count { font-weight: 800; font-size: 15px; color: var(--primary); }
+.chk { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text2); cursor: pointer; }
+.libya-hint { color: var(--text2); font-size: 11.5px; display: none; }
+.libya-hint.on { display: inline; }
+.libya-badge { font-size: 10.5px; background: rgba(5,150,105,.12); color: var(--ok); border: 1px solid rgba(5,150,105,.3); border-radius: 20px; padding: 1px 9px; font-weight: 800; }
+.bilingual-note { margin-top: 6px; font-size: 12px; color: var(--primary); }
+
+/* Filter chips row */
+.filters-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 14px; }
+.filter-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1.5px solid var(--border); background: var(--bg2); color: var(--text2);
+  border-radius: 40px; padding: 6px 13px; font-size: 12.5px; font-weight: 700; cursor: pointer;
+  font-family: var(--font); transition: all .15s;
+}
+.filter-chip:hover { border-color: var(--primary); color: var(--primary); }
+.filter-chip.on { border-color: var(--primary); background: rgba(14,116,144,.1); color: var(--primary); }
+.filter-chip .fc-x { display: none; margin-inline-start: 2px; }
+.filter-chip.on .fc-x { display: inline; }
+.filter-chip-clear { color: var(--warn); border-style: dashed; }
+
+/* Source dots become clickable filters */
+.per-source .ps { display: flex; align-items: center; gap: 5px; cursor: pointer; border-radius: 20px; padding: 2px 8px; transition: background .15s; }
+.per-source .ps:hover { background: var(--bg3); }
+.per-source .ps.active-filter { background: rgba(14,116,144,.14); color: var(--primary); font-weight: 800; }
+
+/* Concept / crosscutting tag cloud */
+.concepts-panel { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 14px; box-shadow: var(--shadow); }
+.concepts-panel h4 { font-size: 13px; color: var(--text2); margin-bottom: 10px; font-weight: 800; }
+.concepts-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.concept-chip {
+  border: 1px solid var(--border); background: var(--bg3); color: var(--text);
+  border-radius: 40px; padding: 5px 13px; font-size: 12.5px; cursor: pointer; font-family: var(--font);
+  transition: all .15s;
+}
+.concept-chip:hover { border-color: var(--accent); color: var(--accent2); }
+.concept-chip.on { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 800; }
+
+.analytics-panel {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 14px; box-shadow: var(--shadow);
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 18px;
+}
+@media (max-width: 820px) { .analytics-panel { grid-template-columns: 1fr; } }
+.an-block h4 { font-size: 13px; color: var(--text2); font-weight: 800; margin-bottom: 10px; }
+.an-bars { display: flex; align-items: flex-end; gap: 3px; height: 110px; }
+.an-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.an-bar { width: 100%; background: linear-gradient(180deg, var(--accent), var(--primary)); border-radius: 3px 3px 0 0; min-height: 2px; }
+.an-bar-label { font-size: 9.5px; color: var(--text2); margin-top: 4px; writing-mode: vertical-rl; transform: rotate(180deg); height: 32px; }
+.an-bar-count { font-size: 9.5px; color: var(--text2); }
+.an-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; }
+.an-list li { display: flex; justify-content: space-between; gap: 8px; font-size: 12.5px; color: var(--text); border-bottom: 1px dashed var(--border); padding-bottom: 6px; }
+.an-list li b { color: var(--primary); font-weight: 800; }
+
+.lib-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 14px; font-size: 13px; }
+.lib-toolbar select, .lib-toolbar input[type="text"] { font-family: var(--font); border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; background: var(--bg); color: var(--text); font-size: 13px; }
+.lib-list { display: flex; flex-direction: column; gap: 10px; max-height: 55vh; overflow-y: auto; }
+.lib-item { border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; background: var(--bg2); }
+.lib-item-top { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.lib-item-title { font-weight: 700; font-size: 13.5px; }
+.lib-item-meta { font-size: 11.5px; color: var(--text2); margin-top: 3px; }
+.lib-item-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.lib-item-actions button, .lib-item-actions select { font-size: 11.5px; padding: 4px 9px; border-radius: 7px; border: 1px solid var(--border); background: var(--bg3); color: var(--text); cursor: pointer; font-family: var(--font); }
+.lib-note { font-size: 12px; color: var(--text2); background: var(--bg3); border-radius: 8px; padding: 7px 10px; margin-top: 7px; line-height: 1.7; }
+.lib-empty { text-align: center; color: var(--text2); font-size: 13px; padding: 30px 0; }
+
+.results-list { display: flex; flex-direction: column; gap: 12px; }
+
+.card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 16px 18px; box-shadow: var(--shadow); transition: border-color .15s;
+}
+.card:hover { border-color: var(--primary); }
+.card-top { display: flex; gap: 10px; align-items: flex-start; }
+.card-main { flex: 1; min-width: 0; }
+.card-src-tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+.src-tag {
+  font-size: 10.5px; font-weight: 800; letter-spacing: .4px;
+  padding: 2px 9px; border-radius: 20px; color: #fff;
+}
+.tag-openalex { background: #16a34a; }
+.tag-crossref { background: #d97706; }
+.tag-semantic { background: #7c3aed; }
+.tag-pubmed { background: #0e7490; }
+.tag-arxiv { background: #b91c1c; }
+.tag-doaj { background: #0f766e; }
+.tag-core { background: #475569; }
+.lock { background: #94a3b8 !important; }
+.open-tag { background: #059669; }
+.card-title {
+  font-size: 16.5px; font-weight: 800; color: var(--primary); cursor: pointer;
+  line-height: 1.5; word-break: break-word;
+}
+.card-title:hover { text-decoration: underline; }
+.card-meta { font-size: 13px; color: var(--text2); margin: 4px 0; word-break: break-word; }
+.card-meta b { color: var(--text); }
+.card-abstract {
+  display: none; font-size: 13.5px; color: var(--text); background: var(--bg3);
+  border-radius: 10px; padding: 10px 14px; margin-top: 8px; border-left: 3px solid var(--primary);
+  word-break: break-word; max-height: 180px; overflow: auto;
+}
+html[dir="ltr"] .card-abstract { border-left: none; border-right: 3px solid var(--primary); }
+.card-abstract.open { display: block; }
+.card-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; align-items: center; }
+.card-actions a, .card-actions button {
+  font-size: 12px; padding: 5px 11px; border-radius: 8px; text-decoration: none;
+  font-family: var(--font); cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+}
+.btn-open { background: var(--primary); color: #fff; border: none; }
+.btn-src { background: var(--bg3); color: var(--text); border: 1px solid var(--border); }
+.btn-src:hover { border-color: var(--primary); color: var(--primary); }
+.card .check { width: 18px; height: 18px; margin-top: 4px; cursor: pointer; accent-color: var(--primary); flex-shrink: 0; }
+.doi-text { font-size: 11px; color: var(--text2); word-break: break-all; }
+.oa-badge { font-size: 10.5px; background: rgba(5,150,105,.12); color: var(--ok); border: 1px solid rgba(5,150,105,.3); border-radius: 20px; padding: 1px 9px; }
+.peer-badge { font-size: 10.5px; background: rgba(124,58,237,.12); color: #7c3aed; border: 1px solid rgba(124,58,237,.3); border-radius: 20px; padding: 1px 9px; font-weight: 800; }
+[data-theme="dark"] .peer-badge { color: #c4b5fd; }
+.retract-badge { font-size: 10.5px; background: rgba(220,38,38,.14); color: #dc2626; border: 1px solid rgba(220,38,38,.4); border-radius: 20px; padding: 1px 9px; font-weight: 800; }
+[data-theme="dark"] .retract-badge { color: #fca5a5; }
+.preprint-badge { font-size: 10.5px; background: rgba(217,119,6,.12); color: var(--accent2); border: 1px solid rgba(217,119,6,.3); border-radius: 20px; padding: 1px 9px; font-weight: 700; }
+.card.is-retracted { border-color: rgba(220,38,38,.5); background: rgba(220,38,38,.04); }
+.retract-alert { background: rgba(220,38,38,.1); border: 1px solid rgba(220,38,38,.35); color: #dc2626; border-radius: 8px; padding: 6px 10px; font-size: 12px; font-weight: 700; margin: 4px 0; }
+[data-theme="dark"] .retract-alert { color: #fca5a5; }
+.card-num {
+  flex-shrink: 0; width: 30px; height: 30px; border-radius: 9px;
+  background: var(--bg3); color: var(--text2); font-weight: 800; font-size: 12px;
+  display: flex; align-items: center; justify-content: center; margin-top: 2px;
+}
+.btn-save {
+  background: none; border: 1px solid var(--border); color: var(--text2);
+  border-radius: 8px; font-size: 15px; line-height: 1; padding: 5px 9px; cursor: pointer;
+}
+.btn-save.on { color: var(--accent2); border-color: var(--accent); background: rgba(217,119,6,.08); }
+
+/* Loading / empty */
+.loading { text-align: center; padding: 40px 0; }
+.spinner {
+  width: 44px; height: 44px; border-radius: 50%; margin: 0 auto 12px;
+  border: 4px solid var(--border); border-top-color: var(--primary);
+  animation: spin .9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-txt { color: var(--text2); font-size: 14px; }
+.empty { text-align: center; padding: 46px 0; color: var(--text2); }
+.empty-ico { font-size: 44px; margin-bottom: 8px; }
+
+.external-block { margin-top: 20px; background: var(--bg2); border: 1px dashed var(--accent); border-radius: var(--radius); padding: 16px; }
+.external-block h3 { font-size: 15px; color: var(--accent2); margin-bottom: 4px; }
+.external-block p { font-size: 12.5px; color: var(--text2); margin-bottom: 12px; }
+.external-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.ext-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--bg3); border: 1px solid var(--border); color: var(--text);
+  border-radius: 10px; padding: 9px 14px; font-family: var(--font); font-size: 13.5px;
+  text-decoration: none; font-weight: 700; transition: all .15s;
+}
+.ext-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-1px); }
+.ext-btn .ext-ico { font-size: 20px; }
+
+.footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--text2); font-size: 13px; text-align: center; }
+.key-row { display: flex; gap: 8px; }
+.key-row input { flex: 1; min-width: 0; }
+.key-hint { font-size: 12px; color: var(--accent2); margin-top: 4px; display: block; }
+.key-status { font-size: 12.5px; margin-top: 4px; display: block; }
+.key-status.ok { color: var(--ok); }
+.key-status.bad { color: var(--warn); }
+.site-credit { margin-top: 10px; font-size: 13.5px; color: var(--primary); font-weight: 600; letter-spacing: .2px; }
+.site-credit::before { content: "✍️ "; font-weight: 400; }
+.ip-bar { margin-top: 8px; }
+.ip-bar code { background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 2px 8px; font-size: 12.5px; color: var(--primary); }
+
+/* Modals */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(6, 15, 28, .6); backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+}
+.modal {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
+  width: 100%; max-width: 760px; max-height: 90vh; display: flex; flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3); animation: pop .18s ease;
+}
+@keyframes pop { from { transform: scale(.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.ai-modal { max-width: 640px; }
+.modal-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 18px; border-bottom: 1px solid var(--border);
+}
+.modal-head h3 { font-size: 16.5px; }
+.modal-close { background: none; border: none; font-size: 18px; cursor: pointer; color: var(--text2); }
+.modal-close:hover { color: var(--text); }
+.modal-body { padding: 18px; overflow-y: auto; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 13.5px; font-weight: 700; }
+.field input, .field select {
+  border: 1px solid var(--border); background: var(--bg3); color: var(--text);
+  border-radius: 10px; padding: 9px 12px; font-family: var(--font); font-size: 14px; width: 100%;
+}
+.field input:focus, .field select:focus { outline: 2px solid var(--primary); border-color: transparent; }
+.field small { color: var(--text2); font-size: 11.5px; }
+
+.format-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 16px 0 10px; }
+.fmt-tab {
+  background: var(--bg3); border: 1px solid var(--border); color: var(--text2);
+  border-radius: 9px; padding: 7px 14px; font-family: var(--font); font-size: 13px; cursor: pointer;
+}
+.fmt-tab.active { background: var(--primary); border-color: var(--primary); color: #fff; font-weight: 700; }
+
+.preview-area { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.preview-head { background: var(--bg3); padding: 8px 14px; font-size: 12.5px; font-weight: 700; display: flex; justify-content: space-between; }
+.preview { padding: 12px 14px; max-height: 240px; overflow: auto; font-size: 12.5px; white-space: pre-wrap; word-break: break-word; font-family: 'Consolas', 'Cairo', monospace; line-height: 1.7; }
+
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; padding-top: 16px; flex-wrap: wrap; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  color: #fff; border: none; border-radius: 11px; padding: 10px 18px;
+  font-family: var(--font); font-size: 14px; font-weight: 800; cursor: pointer;
+}
+.btn-primary:hover { opacity: .92; }
+.btn-ghost { background: var(--bg3); color: var(--text); border: 1px solid var(--border); border-radius: 11px; padding: 10px 18px; font-family: var(--font); font-size: 14px; cursor: pointer; }
+.zip-hint { font-size: 12px; color: var(--text2); margin-top: 8px; line-height: 1.8; background: var(--bg3); border-radius: 10px; padding: 8px 12px; }
+
+/* AI */
+.ai-body { display: flex; flex-direction: column; gap: 12px; }
+.ai-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.ai-action {
+  background: var(--bg3); border: 1px solid var(--border); color: var(--text);
+  border-radius: 10px; padding: 8px 13px; font-family: var(--font); font-size: 12.5px; cursor: pointer; font-weight: 700;
+}
+.ai-action:hover { border-color: var(--primary); color: var(--primary); }
+.ai-log { display: flex; flex-direction: column; gap: 8px; max-height: 300px; overflow-y: auto; border: 1px solid var(--border); border-radius: 12px; padding: 12px; background: var(--bg3); }
+.ai-msg { max-width: 90%; padding: 9px 13px; border-radius: 12px; font-size: 13.5px; white-space: pre-wrap; word-break: break-word; line-height: 1.8; }
+.ai-msg.user { align-self: flex-end; background: var(--primary); color: #fff; }
+.ai-msg.assistant { align-self: flex-start; background: var(--bg2); border: 1px solid var(--border); }
+.ai-msg.system { align-self: flex-start; background: rgba(14,116,144,.1); color: var(--text2); border: 1px dashed var(--border); font-size: 12.5px; }
+.ai-msg .typing { display: inline-block; animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: .2; } }
+.ai-input-row { display: flex; gap: 8px; }
+.ai-input {
+  flex: 1; border: 1px solid var(--border); background: var(--bg3); color: var(--text);
+  border-radius: 12px; padding: 11px 14px; font-family: var(--font); font-size: 14px;
+}
+.ai-input:focus { outline: 2px solid var(--primary); }
+#btnAiSend { flex: 0 0 auto; min-width: 56px; }
+
+/* Toast */
+.toast-wrap { position: fixed; bottom: 20px; inset-inline-start: 20px; z-index: 200; display: flex; flex-direction: column; gap: 8px; }
+.toast {
+  background: var(--bg2); color: var(--text); border: 1px solid var(--border);
+  border-inline-start: 4px solid var(--primary); border-radius: 10px;
+  padding: 11px 16px; font-size: 13.5px; box-shadow: var(--shadow);
+  animation: slidein .2s ease; max-width: 360px;
+}
+.toast.err { border-inline-start-color: var(--warn); }
+.toast.ok { border-inline-start-color: var(--ok); }
+@keyframes slidein { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Print area */
+.print-area { display: none; }
+@media print {
+  body > *:not(.print-area) { display: none !important; }
+  .print-area {
+    display: block; position: static; padding: 8mm;
+    color: #000; background: #fff; font-family: 'Cairo', Tahoma, sans-serif; font-size: 12px;
+  }
+  .print-area .pr-head { text-align: center; border-bottom: 2px solid #0e7490; padding-bottom: 10px; margin-bottom: 16px; }
+  .print-area .pr-title { font-size: 20px; font-weight: 800; color: #0e7490; }
+  .print-area .pr-sub { font-size: 12px; color: #444; margin-top: 4px; }
+  .print-area .pr-query { background: #eef2f8; padding: 8px 12px; border-radius: 8px; margin: 12px 0; }
+  .print-area .pr-ref { margin-bottom: 10px; padding-inline-start: 14px; position: relative; }
+  .print-area .pr-ref::before { content: "•"; position: absolute; inset-inline-start: 0; color: #0e7490; }
+  .print-area .pr-section { margin-top: 18px; font-weight: 800; color: #0e7490; font-size: 15px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+}
+
+@media (max-width: 720px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .brand-sub { display: none; }
+  .ico-btn .lbl { display: none; }
+  .search-actions { flex-direction: column; }
+  .year-sel, .dash { width: 100%; max-width: none; text-align: center; }
+  .btn-search { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-logo">📚</div>
+      <div class="brand-txt">
+        <div class="brand-name" data-i18n="brandName">عين المصدر</div>
+        <div class="brand-sub" data-i18n="brandSub">Ain Al-Masdar</div>
+      </div>
+    </div>
+    <nav class="top-actions">
+      <button id="btnLibrary" class="ico-btn" title="Library" data-i18n-title="myLibrary"><span class="ico">⭐</span><span class="lbl" data-i18n="myLibrary">مكتبتي</span></button>
+      <button id="btnDoiImport" class="ico-btn" title="DOI batch import" data-i18n-title="doiImportTitle"><span class="ico">🔢</span><span class="lbl" data-i18n="doiImportBtn">استيراد DOI</span></button>
+      <button id="btnAi" class="ico-btn" title="AI" data-i18n-title="aiAssistant"><span class="ico">✨</span><span class="lbl" data-i18n="aiAssistant">المساعد الذكي</span></button>
+      <button id="btnSettings" class="ico-btn" title="Settings" data-i18n-title="settings"><span class="ico">⚙️</span><span class="lbl" data-i18n="settings">الإعدادات</span></button>
+      <button id="btnLang" class="ico-btn" title="Language"><span class="lbl">English</span></button>
+      <button id="btnTheme" class="ico-btn" title="Theme"><span class="ico">🌙</span></button>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <div class="hero-badge" data-i18n="heroBadge">منصة بحث علمي موحّدة • ثنائية اللغة • مدعومة بالذكاء الاصطناعي</div>
+    <h1 data-i18n="heroTitle">ابحث في أفضل المصادر العلمية العربية والعالمية</h1>
+    <p class="hero-sub" data-i18n="heroSub">نتائج حقيقية تُجلب مباشرة من OpenAlex وCrossref وSemantic Scholar وPubMed وarXiv وDOAJ وغيرها — مع تصدير احترافي بأنظمة التوثيق الأكاديمية.</p>
+
+    <div class="search-box">
+      <input type="text" id="inputQ" class="search-input" placeholder="أدخل موضوع البحث، عنوان، مؤلف، أو DOI..." data-i18n-ph="searchPh" autocomplete="off">
+      <div class="search-actions">
+        <select id="selectFrom" class="year-sel" title="من سنة"></select>
+        <span class="dash">–</span>
+        <select id="selectTo" class="year-sel" title="إلى سنة"></select>
+        <button id="btnSearch" class="btn-search" data-i18n="search">بحث 🔍</button>
+      </div>
+      <div class="search-actions">
+        <label class="chk"><input type="checkbox" id="chkLibyaAffil"> 🇱🇾 <span data-i18n="libyaAffilFilter">الجامعات الليبية فقط</span></label>
+        <small class="libya-hint" id="libyaHint" data-i18n="libyaAffilHint">(يقتصر على OpenAlex لضمان دقة تصنيف الانتساب)</small>
+        <button type="button" class="mini" id="btnCopyLink">🔗 <span data-i18n="copyLink">نسخ رابط البحث</span></button>
+      </div>
+    </div>
+
+    <div class="suggest-chips" id="suggestChips"></div>
+  </section>
+
+  <section class="sources-panel">
+    <div class="sources-head">
+      <h2 data-i18n="sourcesTitle">اختر المصادر</h2>
+      <span class="hint" data-i18n="sourcesHint">المصادر المرتبطة بواجهات برمجية تجلب نتائج حقيقية؛ أما المواقع الخاضعة للاشتراك فتقدّم لك روابط بحث مباشرة.</span>
+      <div class="src-btns">
+        <button class="mini" data-i18n_active="selectAll" data-i18n="selectAll" id="btnAllSources">تحديد الكل</button>
+        <button class="mini" id="btnResetSources" data-i18n="resetSources">إعادة الضبط</button>
+      </div>
+    </div>
+    <div class="sources-grid" id="sourcesGrid"></div>
+    <div id="coreKeyNotice" class="core-notice hidden">⚠️ <span data-i18n="coreKeyNotice">يتطلب CORE مفتاح واجهة برمجة مجانياً — أضفه في الإعدادات لتشغيل هذا المصدر.</span></div>
+  </section>
+
+  <section class="results-section">
+    <div class="status-bar hidden" id="statusBar">
+      <div class="status-msg" id="statusMsg"></div>
+      <div class="per-source hidden" id="perSource"></div>
+    </div>
+
+    <div class="results-toolbar hidden" id="resultsToolbar">
+      <div class="toolbar-left">
+        <span class="res-count" id="resCount"></span>
+        <select id="selectSort" class="sort-sel" data-i18n="sortLabel"></select>
+        <label class="chk"><input type="checkbox" id="checkSelectAll"><span data-i18n="selectAllVisible">تحديد المرئي</span></label>
+      </div>
+      <div class="toolbar-right">
+        <button id="btnAnalytics" class="mini">📊 <span data-i18n="analyticsBtn">تحليلات</span></button>
+        <button id="btnCopyRefs" class="mini" data-i18n="copyRefs">📋 نسخ المراجع</button>
+        <button id="btnClearSel" class="mini" data-i18n="clearSel">إلغاء التحديد</button>
+      </div>
+    </div>
+
+    <div class="analytics-panel hidden" id="analyticsPanel"></div>
+
+    <div class="filters-bar hidden" id="filtersBar">
+      <button type="button" class="filter-chip" data-filter="oaOnly">🔓 <span data-i18n="openAccessOnly">وصول مفتوح فقط</span><span class="fc-x">✕</span></button>
+      <button type="button" class="filter-chip" data-filter="pdfOnly">📄 <span data-i18n="pdfOnly">PDF متاح</span><span class="fc-x">✕</span></button>
+      <button type="button" class="filter-chip" data-filter="peerOnly">🏅 <span data-i18n="peerReviewedOnly">مقالات محكّمة فقط</span><span class="fc-x">✕</span></button>
+      <button type="button" class="filter-chip" data-filter="savedOnly">⭐ <span data-i18n="savedOnly">المحفوظة فقط</span><span class="fc-x">✕</span></button>
+      <button type="button" class="filter-chip filter-chip-clear hidden" id="btnClearFilters">✕ <span data-i18n="clearFilters">مسح كل الفلاتر</span></button>
+    </div>
+
+    <div class="concepts-panel hidden" id="conceptsPanel">
+      <h4 data-i18n="concepts">المفاهيم المتقاطعة (انقر للتركيز)</h4>
+      <div class="concepts-grid" id="conceptsGrid"></div>
+    </div>
+
+    <div id="resultsList" class="results-list"></div>
+
+    <div class="loading hidden" id="loading">
+      <div class="spinner"></div>
+      <div class="loading-txt" data-i18n="loadingTxt">جارٍ جلب النتائج من المصادر المختارة...</div>
+    </div>
+
+    <div class="empty hidden" id="empty">
+      <div class="empty-ico">🔎</div>
+      <div class="empty-txt" id="emptyTxt"></div>
+    </div>
+
+    <div class="external-block hidden" id="externalBlock">
+      <h3 data-i18n="externalTitle">فتح البحث في المواقع الخارجية</h3>
+      <p data-i18n="externalNote">هذه المواقع لا تقدّم واجهات برمجة عامة؛ اضغط الزر لفتح البحث مباشرة على الموقع الرسمي.</p>
+      <div class="external-links" id="externalLinks"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div data-i18n="footerNote">عين المصدر — منصة موحّدة للبحث في المصادر والمراجع العلمية القديمة والحديثة.</div>
+    <div class="site-credit" data-i18n="credit">فكرة وتصميم: د. حسن الشيباني</div>
+    <div class="ip-bar">🌐 <span data-i18n="accessInfo">الوصول عبر الجهاز:</span> <code id="localUrl"></code> <span data-i18n="orAccess">أو عبر الشبكة:</span> <code id="netUrl"></code></div>
+  </footer>
+</main>
+
+<!-- Export modal -->
+<div class="modal-backdrop hidden" id="exportModal">
+  <div class="modal export-modal">
+    <div class="modal-head">
+      <h3 data-i18n="exportTitle">تصدير المراجع</h3>
+      <button class="modal-close" data-close="exportModal">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="field">
+          <label data-i18n="exportScope">النطاق</label>
+          <select id="exportScope">
+            <option value="selected" data-i18n="exportSelected">المحدد فقط</option>
+            <option value="all" data-i18n="exportAll">جميع النتائج</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-i18n="citationStyle">نظام التوثيق الأكاديمي</label>
+          <select id="exportStyle">
+            <option value="apa">APA (American Psychological Association)</option>
+            <option value="harvard">Harvard</option>
+            <option value="mla">MLA</option>
+            <option value="chicago">Chicago (Notes &amp; Bibliography)</option>
+            <option value="chicagoAuthDate">Chicago (Author-Date)</option>
+            <option value="ieee">IEEE</option>
+            <option value="vancouver">Vancouver</option>
+            <option value="turabian">Turabian</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="format-tabs" role="tablist">
+        <button class="fmt-tab active" data-fmt="pdf">PDF</button>
+        <button class="fmt-tab" data-fmt="doc">Word (.doc)</button>
+        <button class="fmt-tab" data-fmt="bibtex">BibTeX</button>
+        <button class="fmt-tab" data-fmt="ris">RIS</button>
+        <button class="fmt-tab" data-fmt="csv">CSV</button>
+        <button class="fmt-tab" data-fmt="json">JSON</button>
+      </div>
+
+      <div class="preview-area">
+        <div class="preview-head"><span data-i18n="preview">معاينة</span><span class="preview-info" id="previewInfo"></span></div>
+        <pre class="preview" id="exportPreview"></pre>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-primary" id="btnDownload">⬇ <span data-i18n="download">تنزيل</span></button>
+        <button class="btn-primary" id="btnDownloadZip">🗜 <span data-i18n="downloadZip">تنزيل حزمة مضغوطة (ZIP)</span></button>
+        <button class="btn-primary" id="btnPrintPdf">🖨 <span data-i18n="printSavePdf">طباعة / حفظ PDF</span></button>
+        <button class="btn-ghost" data-close="exportModal" data-i18n="cancel">إلغاء</button>
+      </div>
+      <p class="zip-hint" id="zipHint" data-i18n="zipHint">الحزمة المضغوطة تضم الملفات بصيغ RIS وBibTeX وWord وCSV وJSON معًا؛ بعد فك الضغط، افتح ملف references.ris أو references.bib مباشرةً وسيُستورد تلقائيًا في EndNote أو Zotero أو Mendeley.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Settings modal -->
+<div class="modal-backdrop hidden" id="settingsModal">
+  <div class="modal settings-modal">
+    <div class="modal-head">
+      <h3 data-i18n="settingsTitle">الإعدادات</h3>
+      <button class="modal-close" data-close="settingsModal">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label data-i18n="aiKey">مفتاح الذكاء الاصطناعي (OpenAI أو متوافق)</label>
+        <input type="password" id="setAiKey" placeholder="sk-...">
+        <small data-i18n="aiKeyHint">يُخزَّن محلياً في متصفحك فقط. بدونه تعمل الميزات الذكية المحلية (تلخيص استخلاصي) بدون إنترنت.</small>
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label data-i18n="aiBase">المزوّد / الرابط الأساسي</label>
+          <input type="text" id="setAiBase" placeholder="https://api.openai.com/v1">
+        </div>
+        <div class="field">
+          <label data-i18n="aiModel">النموذج</label>
+          <select id="setAiModel">
+            <option>gpt-4o-mini</option>
+            <option>gpt-4o</option>
+            <option>gpt-4.1-mini</option>
+            <option>gpt-4.1</option>
+            <option>deepseek-chat</option>
+            <option>gemini-1.5-pro</option>
+            <option>qwen-plus</option>
+            <option>claude-3-7-sonnet</option>
+            <option>grok-2</option>
+            <option>mistral-large-latest</option>
+          </select>
+        </div>
+      </div>
+      <hr>
+      <div class="form-grid">
+        <div class="field">
+          <label data-i18n="coreKey">مفتاح CORE API <small>(اختياري)</small></label>
+          <div class="key-row">
+            <input type="password" id="setCoreKey" placeholder="core_...">
+            <button type="button" class="mini" id="btnTestCore" data-i18n="testKey">اختبار المفتاح</button>
+          </div>
+          <span class="key-hint hidden" id="coreUnsavedHint" data-i18n="coreUnsaved">لم يُحفظ بعد — اضغط «حفظ» أسفل النافذة لتطبيقه.</span>
+          <span class="key-status" id="coreKeyStatus"></span>
+        </div>
+        <div class="field">
+          <label data-i18n="semanticKey">مفتاح Semantic Scholar <small>(اختياري)</small></label>
+          <input type="password" id="setSemKey" placeholder="الحد الأدنى المجاني يرفع حد الطلبات">
+        </div>
+      </div>
+      <hr>
+      <div class="form-grid">
+        <div class="field">
+          <label data-i18n="perPage">عدد النتائج لكل مصدر</label>
+          <select id="setLimit">
+            <option value="10">10</option>
+            <option value="15" selected>15</option>
+            <option value="25">25</option>
+            <option value="40">40</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-primary" id="btnSaveSettings" data-i18n="save">حفظ</button>
+        <button class="btn-ghost" data-close="settingsModal" data-i18n="cancel">إلغاء</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AI assistant modal -->
+<div class="modal-backdrop hidden" id="doiModal">
+  <div class="modal ai-modal">
+    <div class="modal-head">
+      <h3 data-i18n="doiImportTitle">استيراد بالجملة عبر DOI</h3>
+      <button class="modal-close" data-close="doiModal">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="zip-hint" data-i18n="doiImportHint">الصق قائمة DOIs (واحد في كل سطر) وسنجلب بياناتها من Crossref ونضيفها إلى نتائج البحث الحالية، لبناء ببليوغرافيا فورية.</p>
+      <textarea id="doiTextarea" rows="8" style="width:100%;font-family:var(--font);border:1px solid var(--border);border-radius:10px;padding:10px;background:var(--bg);color:var(--text);font-size:13px" placeholder="10.1000/xyz123&#10;10.1000/abc456"></textarea>
+      <div id="doiImportStatus" class="zip-hint hidden"></div>
+      <div class="modal-actions">
+        <button class="btn-primary" id="btnDoiImportRun">⬇ <span data-i18n="doiImportRun">استيراد</span></button>
+        <button class="btn-ghost" data-close="doiModal" data-i18n="cancel">إلغاء</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop hidden" id="libraryModal">
+  <div class="modal ai-modal">
+    <div class="modal-head">
+      <h3 data-i18n="myLibraryTitle">مكتبتي — المراجع المحفوظة</h3>
+      <button class="modal-close" data-close="libraryModal">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="lib-toolbar">
+        <label data-i18n="collection">المجموعة الحالية</label>
+        <select id="selectCollection"></select>
+        <input type="text" id="inputNewCollection" placeholder="اسم مجموعة جديدة…" data-i18n-ph="newCollectionPh">
+        <button class="mini" id="btnAddCollection" data-i18n="createCollection">+ إنشاء</button>
+        <button class="mini" id="btnExportLibrary" data-i18n="exportLibrary">⬇ تصدير المكتبة</button>
+      </div>
+      <div id="libraryList" class="lib-list"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop hidden" id="aiModal">
+  <div class="modal ai-modal">
+    <div class="modal-head">
+      <h3 data-i18n="aiAssistantTitle">المساعد الذكي للبحث</h3>
+      <button class="modal-close" data-close="aiModal">✕</button>
+    </div>
+    <div class="modal-body ai-body">
+      <div class="ai-actions">
+        <button class="ai-action" data-ai="intro" data-i18n="aiIntro">✍️ مقدمة بحثية عن الموضوع</button>
+        <button class="ai-action" data-ai="summary" data-i18n="aiSummary">📋 ملخص شامل للمصادر المحددة</button>
+        <button class="ai-action" data-ai="gap" data-i18n="aiGap">🧭 فرص بحثية وفجوات</button>
+        <button class="ai-action" data-ai="best" data-i18n="aiBest">🏆 أهم المصادر الموصى بها</button>
+      </div>
+      <div class="ai-log" id="aiLog">
+        <div class="ai-msg system" id="aiWelcome" data-i18n="aiWelcome">اسأل عن النتائج أو استخدم الأزرار أعلاه. عند توفر نتائج متعددة (5+) سيعمل الذكاء الاصطناعي بشكل أفضل.</div>
+      </div>
+      <div class="ai-input-row">
+        <input type="text" id="aiInput" class="ai-input" placeholder="اكتب سؤالاً للذكاء الاصطناعي..." data-i18n-ph="aiInputPh">
+        <button class="btn-search" id="btnAiSend">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- Hidden printable area -->
+<div id="printArea" class="print-area"></div>
+
+<script>
+'use strict';
+
+/* ==================================================================== */
+/*  i18n                                                                */
+/* ==================================================================== */
+const I18N = {
+  ar: {
+    brandName: 'عين المصدر', brandSub: 'Ain Al-Masdar',
+    aiAssistant: 'المساعد الذكي', settings: 'الإعدادات',
+    heroBadge: 'منصة بحث علمي موحّدة • ثنائية اللغة • مدعومة بالذكاء الاصطناعي',
+    heroTitle: 'ابحث في أفضل المصادر العلمية العربية والعالمية',
+    heroSub: 'نتائج حقيقية تُجلب مباشرة من OpenAlex وCrossref وSemantic Scholar وPubMed وarXiv وDOAJ وغيرها — مع تصدير احترافي بأنظمة التوثيق الأكاديمية.',
+    searchPh: 'أدخل موضوع البحث، عنوان، مؤلف، أو DOI...', search: 'بحث 🔍',
+    sourcesTitle: 'اختر المصادر', sourcesHint: 'المصادر المرتبطة بواجهات برمجية تجلب نتائج حقيقية؛ أما المواقع الخاضعة للاشتراك فتقدّم لك روابط بحث مباشرة.',
+    selectAll: 'تحديد الكل', deselectAll: 'إلغاء التحديد', resetSources: 'إعادة الضبط',
+    coreKeyNotice: 'يتطلب CORE مفتاح واجهة برمجة مجانياً — أضفه في الإعدادات لتشغيل هذا المصدر.',
+    selectAllVisible: 'تحديد المرئي', clearSel: 'إلغاء التحديد',
+    loadingTxt: 'جارٍ جلب النتائج من المصادر المختارة...',
+    externalTitle: 'فتح البحث في المواقع الخارجية',
+    externalNote: 'هذه المواقع لا تقدّم واجهات برمجة عامة؛ اضغط الزر لفتح البحث مباشرة على الموقع الرسمي.',
+    footerNote: 'عين المصدر — منصة موحّدة للبحث في المصادر والمراجع العلمية القديمة والحديثة.',
+    credit: 'فكرة وتصميم: د. حسن الشيباني',
+    accessInfo: 'الوصول عبر الجهاز:', orAccess: 'أو عبر الشبكة:',
+    sortRelevance: 'الترتيب: الصلة', sortYearDesc: 'الأحدث أولاً', sortYearAsc: 'الأقدم أولاً', sortCitations: 'الأكثر استشهاداً', sortTitle: 'حسب العنوان',
+    noResults: 'لم يتم العثور على أي نتائج مطابقة.', tryAgain: 'جرّب تعديل الكلمات المفتاحية أو توسيع نطاق السنوات.',
+    foundIn: 'تم العثور على', resultsOf: 'نتيجة من', sourcesPlural: 'مصادر',
+    errorSources: 'تعذّر الاتصال ببعض المصادر:', tooltip429Rate: 'هذا المصدر يفرض حدًّا لعدد الطلبات — أعد المحاولة بعد قليل أو أضف مفتاحًا مجانيًا في الإعدادات.',
+    openSource: 'فتح المصدر', viewAbstract: 'الملخص', hideAbstract: 'إخفاء الملخص', cite: 'استشهاد', copyPdf: 'PDF',
+    oaBadge: 'وصول مفتوح', typeArticle: 'مقالة', typeBook: 'كتاب', typeChapter: 'فصل', typeThesis: 'رسالة/أطروحة', typeConference: 'ورقة مؤتمر', typePreprint: 'ما قبل الطبع', typeReport: 'تقرير', typeOther: 'وثيقة', typePaper: 'ورقة بحثية', typeDataset: 'بيانات', typeBookSection: 'فصل في كتاب', typeJournalArticle: 'مقالة علمية', typeProceedingsArticle: 'ورقة مؤتمر', typeDissertation: 'أطروحة', typePostedContent: 'نشر إلكتروني',
+    citations: 'استشهاد', yearUnknown: 'بدون سنة', view: 'عرض',
+    export: 'تصدير المحدد', exportTitle: 'تصدير المراجع', exportScope: 'النطاق',
+    exportSelected: 'المحدد فقط', exportAll: 'جميع النتائج', citationStyle: 'نظام التوثيق الأكاديمي',
+    preview: 'معاينة', download: 'تنزيل', printSavePdf: 'طباعة / حفظ PDF', cancel: 'إلغاء',
+    settingsTitle: 'الإعدادات', aiKey: 'مفتاح الذكاء الاصطناعي (OpenAI أو متوافق)',
+    aiKeyHint: 'يُخزَّن محلياً في متصفحك فقط. بدونه تعمل الميزات الذكية المحلية (تلخيص استخلاصي) بدون إنترنت.',
+    aiBase: 'المزوّد / الرابط الأساسي', aiModel: 'النموذج', coreKeyLabel: 'مفتاح CORE API (اختياري)', semanticKeyLabel: 'مفتاح Semantic Scholar (اختياري)', perPage: 'عدد النتائج لكل مصدر', save: 'حفظ',
+    testKey: 'اختبار المفتاح', testingKey: 'جارٍ الاختبار...', keyOk: '✓ المفتاح يعمل', keyBad: '✗ المفتاح غير صالح أو لا يصل إليه الخادم', coreUnsaved: 'لم يُحفظ بعد — اضغط «حفظ» أسفل النافذة لتطبيقه.',
+    aiAssistantTitle: 'المساعد الذكي للبحث',
+    aiIntro: '✍️ مقدمة بحثية عن الموضوع', aiSummary: '📋 ملخص شامل للمصادر المحددة', aiGap: '🧭 فرص بحثية وفجوات', aiBest: '🏆 أهم المصادر الموصى بها',
+    aiWelcome: 'اسأل عن النتائج أو استخدم الأزرار أعلاه. عند توفر نتائج متعددة (5+) سيعمل الذكاء الاصطناعي بشكل أفضل.',
+    aiInputPh: 'اكتب سؤالاً للذكاء الاصطناعي...',
+    noAiKey: 'لم يتم ضبط مفتاح الذكاء الاصطناعي. سأستخدم الخلاصة المحلية التي تعمل دون إنترنت.',
+    copied: 'تم النسخ إلى الحافظة ✓', noSelection: 'لم يتم تحديد أي نتائج — سيتم تصدير جميع النتائج.',
+    searchFirst: 'نفّذ بحثاً أولاً حتى يظهر لك المساعد الذكي.',
+    aiErr: 'تعذر الاتصال بالذكاء الاصطناعي:', retryHint: 'تأكد من المفتاح والرابط في الإعدادات.',
+    exportEmpty: 'لا توجد نتائج للتصدير.',
+    summaryFor: 'خلاصة', introTitle: 'مقدمة بحثية', gapTitle: 'الفجوات البحثية', bestTitle: 'أهم المصادر',
+    bestLocal: 'المصادر الأكثر استشهاداً والواصلة مفتوحة الوصول هي الأنسب للاعتماد عليها.',
+    searchExternal: 'بحث خارجي', openSite: 'فتح الموقع', fromYear: 'من سنة', toYear: 'إلى سنة',
+    notChecked: 'غير محدد', allYears: 'الكل',
+    quickSuggest: 'جرّب البحث عن:',
+    openAccessOnly: 'وصول مفتوح فقط', pdfOnly: 'PDF متاح', peerReviewedOnly: 'مقالات محكّمة فقط', savedOnly: 'المحفوظة فقط',
+    clearFilters: 'مسح كل الفلاتر', peerBadge: 'مقال محكّم',
+    concepts: 'المفاهيم المتقاطعة (انقر للتركيز)', noConceptsYet: 'لا توجد مفاهيم كافية لعرضها بعد.',
+    copyLink: 'نسخ رابط البحث', copyLinkOk: 'تم نسخ رابط البحث ✓', copyLinkEmpty: 'نفّذ بحثاً أولاً حتى يتوفر رابط.',
+    copyRefs: '📋 نسخ المراجع', copyRefsOk: 'تم نسخ المراجع إلى الحافظة ✓',
+    saveItem: 'حفظ', unsaveItem: 'إلغاء الحفظ', savedToast: 'تم الحفظ ⭐', unsavedToast: 'أُزيل من المحفوظات',
+    filteredOf: 'نتيجة (من أصل', filteredClose: ')', clickToFilterSource: 'انقر للتصفية حسب هذا المصدر',
+    downloadZip: 'تنزيل حزمة مضغوطة (ZIP)',
+    zipHint: 'الحزمة المضغوطة تضم الملفات بصيغ RIS وBibTeX وWord وCSV وJSON معًا؛ بعد فك الضغط، افتح ملف references.ris أو references.bib مباشرةً وسيُستورد تلقائيًا في EndNote أو Zotero أو Mendeley.',
+    zipBuilding: 'جارٍ تجهيز الحزمة المضغوطة...', zipReady: 'تم تنزيل الحزمة المضغوطة ✓', zipErr: 'تعذّر إنشاء الحزمة المضغوطة، جرّب تنزيل الملفات منفردة.',
+    retractedBadge: 'بحث مسحوب', retractedAlert: 'تنبيه: هذا البحث تم سحبه (Retracted) من الناشر — تجنّب الاستشهاد به.',
+    preprintBadge: 'نسخة أولية (لم تُحكّم بعد)',
+    libyaAffilFilter: 'الجامعات الليبية فقط',
+    libyaAffilHint: '(يقتصر على OpenAlex لضمان دقة تصنيف الانتساب)', libyaBadge: 'انتساب ليبي مؤكَّد',
+    analyticsBtn: 'تحليلات', anYears: 'توزيع النتائج حسب السنة', anAuthors: 'أكثر الباحثين تكراراً', anVenues: 'أكثر المجلات/الدوريات تكراراً',
+    myLibrary: 'مكتبتي', myLibraryTitle: 'مكتبتي — المراجع المحفوظة', collection: 'المجموعة الحالية', newCollectionPh: 'اسم مجموعة جديدة…',
+    createCollection: '+ إنشاء', exportLibrary: '⬇ تصدير المكتبة (ZIP)', libraryEmpty: 'لا توجد مراجع محفوظة بعد. اضغط ⭐ على أي نتيجة لحفظها هنا.',
+    aiAnnotate: 'ملاحظة AI', regenNote: 'إعادة توليد الملاحظة', remove: 'حذف', working: 'جارٍ التوليد...',
+    doiImportBtn: 'استيراد DOI', doiImportTitle: 'استيراد بالجملة عبر DOI',
+    doiImportHint: 'الصق قائمة DOIs (واحد في كل سطر) وسنجلب بياناتها من Crossref ونضيفها إلى نتائج البحث الحالية، لبناء ببليوغرافيا فورية.',
+    doiImportRun: 'استيراد', doiImportNone: 'لم يتم العثور على أي DOI صالح في النص الملصق.',
+    doiImportProgress: 'جارٍ الجلب...', doiImportDone: 'تم استيراد {ok} مرجعاً بنجاح، وفشل {fail}.',
+  },
+  en: {
+    brandName: 'Ain Al-Masdar', brandSub: 'Research Sources Platform',
+    aiAssistant: 'AI Assistant', settings: 'Settings',
+    heroBadge: 'Unified scholarly search • Bilingual • AI-assisted',
+    heroTitle: 'Search the best Arabic and international scholarly sources',
+    heroSub: 'Real results fetched live from OpenAlex, Crossref, Semantic Scholar, PubMed, arXiv, DOAJ & more — with professional export and academic citation styles.',
+    searchPh: 'Enter a topic, title, author, or DOI...', search: 'Search 🔍',
+    sourcesTitle: 'Choose sources', sourcesHint: 'API-connected sources return real results instantly; subscription-only sites provide direct search links.',
+    selectAll: 'Select all', deselectAll: 'Clear selection', resetSources: 'Reset',
+    coreKeyNotice: 'CORE requires a free API key — add it in Settings to enable this source.',
+    selectAllVisible: 'Select visible', clearSel: 'Clear selection',
+    loadingTxt: 'Fetching results from the selected sources...',
+    externalTitle: 'Open search on external websites',
+    externalNote: 'These sites expose no public API; click to open the search directly on the official website.',
+    footerNote: 'Ain Al-Masdar — a unified platform for scholarly sources, old and new.',
+    credit: 'Idea and design: Dr. Hassan Al-Shebani',
+    accessInfo: 'Access on this device:', orAccess: 'or on your network:',
+    sortRelevance: 'Sort: Relevance', sortYearDesc: 'Newest first', sortYearAsc: 'Oldest first', sortCitations: 'Most cited', sortTitle: 'By title',
+    noResults: 'No matching results found.', tryAgain: 'Try refining keywords or widening the year range.',
+    foundIn: 'Found', resultsOf: 'records from', sourcesPlural: 'sources',
+    errorSources: 'Some sources could not be reached:', tooltip429Rate: 'API rate limit reached — retry later or add a free key in Settings.',
+    openSource: 'Open source', viewAbstract: 'Abstract', hideAbstract: 'Hide abstract', cite: 'Cite', copyPdf: 'PDF',
+    oaBadge: 'Open access', typeArticle: 'Article', typeBook: 'Book', typeChapter: 'Chapter', typeThesis: 'Thesis', typeConference: 'Conference paper', typePreprint: 'Preprint', typeReport: 'Report', typeOther: 'Document', typePaper: 'Paper', typeDataset: 'Dataset', typeBookSection: 'Book chapter', typeJournalArticle: 'Journal article', typeProceedingsArticle: 'Conference paper', typeDissertation: 'Dissertation', typePostedContent: 'Online posting',
+    citations: 'citations', yearUnknown: 'n.d.', view: 'View',
+    export: 'Export selected', exportTitle: 'Export references', exportScope: 'Scope',
+    exportSelected: 'Selected only', exportAll: 'All results', citationStyle: 'Citation style',
+    preview: 'Preview', download: 'Download', printSavePdf: 'Print / Save as PDF', cancel: 'Cancel',
+    settingsTitle: 'Settings', aiKey: 'AI API key (OpenAI or compatible)',
+    aiKeyHint: 'Stored only in your browser. Without it, local intelligent features (extractive summaries) still work offline.',
+    aiBase: 'Provider / base URL', aiModel: 'Model', coreKeyLabel: 'CORE API key (optional)', semanticKeyLabel: 'Semantic Scholar key (optional)', perPage: 'Results per source', save: 'Save',
+    testKey: 'Test key', testingKey: 'Testing...', keyOk: '✓ Key works', keyBad: '✗ Invalid key or unreachable', coreUnsaved: 'Not saved yet — press "Save" at the bottom to apply it.',
+    aiAssistantTitle: 'AI Research Assistant',
+    aiIntro: '✍️ Research introduction', aiSummary: '📋 Full summary of selected results', aiGap: '🧭 Gaps & research opportunities', aiBest: '🏆 Top recommended sources',
+    aiWelcome: 'Ask about the results or use the buttons above. With 5+ results the AI works at its best.',
+    aiInputPh: 'Ask the AI anything...',
+    noAiKey: 'No AI key configured. Falling back to the local summary (works offline).',
+    copied: 'Copied to clipboard ✓', noSelection: 'Nothing selected — exporting all results.',
+    searchFirst: 'Run a search first so the assistant can help.',
+    aiErr: 'AI connection failed:', retryHint: 'Check key and base URL in Settings.',
+    exportEmpty: 'Nothing to export.',
+    summaryFor: 'Summary', introTitle: 'Research introduction', gapTitle: 'Research gaps', bestTitle: 'Top sources',
+    bestLocal: 'Most-cited, open-access sources are usually the most reliable starting points.',
+    searchExternal: 'External search', openSite: 'Open site', fromYear: 'From year', toYear: 'To year',
+    notChecked: 'unchecked', allYears: 'All',
+    quickSuggest: 'Try searching:',
+    openAccessOnly: 'Open access only', pdfOnly: 'PDF available', peerReviewedOnly: 'Peer-reviewed only', savedOnly: 'Saved only',
+    clearFilters: 'Clear all filters', peerBadge: 'Peer-reviewed',
+    concepts: 'Crosscutting concepts (click to focus)', noConceptsYet: 'Not enough concepts to show yet.',
+    copyLink: 'Copy search link', copyLinkOk: 'Search link copied ✓', copyLinkEmpty: 'Run a search first to get a link.',
+    copyRefs: '📋 Copy references', copyRefsOk: 'References copied to clipboard ✓',
+    saveItem: 'Save', unsaveItem: 'Unsave', savedToast: 'Saved ⭐', unsavedToast: 'Removed from saved',
+    filteredOf: 'results (of', filteredClose: ')', clickToFilterSource: 'Click to filter by this source',
+    downloadZip: 'Download ZIP bundle',
+    zipHint: 'The ZIP bundle includes RIS, BibTeX, Word, CSV and JSON files together. After unzipping, open references.ris or references.bib directly and it will import automatically into EndNote, Zotero, or Mendeley.',
+    zipBuilding: 'Building the ZIP bundle...', zipReady: 'ZIP bundle downloaded ✓', zipErr: 'Could not build the ZIP bundle — try downloading the individual files instead.',
+    retractedBadge: 'Retracted', retractedAlert: 'Warning: this paper has been retracted by the publisher — avoid citing it.',
+    preprintBadge: 'Preprint (not yet peer-reviewed)',
+    libyaAffilFilter: 'Libyan universities only',
+    libyaAffilHint: '(OpenAlex only, to guarantee affiliation accuracy)', libyaBadge: 'Libyan affiliation confirmed',
+    analyticsBtn: 'Analytics', anYears: 'Results by year', anAuthors: 'Most frequent authors', anVenues: 'Most frequent journals/venues',
+    myLibrary: 'My Library', myLibraryTitle: 'My Library — Saved References', collection: 'Current collection', newCollectionPh: 'New collection name…',
+    createCollection: '+ Create', exportLibrary: '⬇ Export library (ZIP)', libraryEmpty: 'No saved references yet. Click ⭐ on any result to save it here.',
+    aiAnnotate: 'AI note', regenNote: 'Regenerate note', remove: 'Remove', working: 'Generating...',
+    doiImportBtn: 'DOI import', doiImportTitle: 'Batch import via DOI',
+    doiImportHint: 'Paste a list of DOIs (one per line) — we\'ll fetch their data from Crossref and add them to the current results, for an instant bibliography.',
+    doiImportRun: 'Import', doiImportNone: 'No valid DOI found in the pasted text.',
+    doiImportProgress: 'Fetching...', doiImportDone: 'Imported {ok} references successfully, {fail} failed.',
+  },
+};
+let LANG = 'ar';
+const t = (k) => (I18N[LANG] && I18N[LANG][k]) || (LANG === 'ar' ? I18N.en[k] : '');
+const dir = () => (LANG === 'ar' ? 'rtl' : 'ltr');
+
+function applyI18n() {
+  document.documentElement.lang = LANG;
+  document.documentElement.dir = dir();
+  document.title = LANG === 'ar' ? 'عين المصدر | Ain Al-Masdar — منصة البحث عن المصادر والمراجع العلمية' : 'Ain Al-Masdar — Scholarly Sources Platform';
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    if (['SELECT', 'INPUT', 'TEXTAREA'].includes(el.tagName)) return;
+    el.textContent = t(el.dataset.i18n);
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach((el) => { el.placeholder = t(el.dataset.i18nPh); });
+  document.querySelectorAll('[data-i18n-title]').forEach((el) => { el.title = t(el.dataset.i18nTitle); });
+  document.getElementById('btnLang').querySelector('.lbl').textContent = LANG === 'ar' ? 'English' : 'العربية';
+  document.getElementById('selectSort').innerHTML = Object.entries({
+    relevance: t('sortRelevance'), yearDesc: t('sortYearDesc'), yearAsc: t('sortYearAsc'), citations: t('sortCitations'), title: t('sortTitle'),
+  }).map(([v, l]) => `<option value="${v}">${l}</option>`).join('');
+}
+
+/* ==================================================================== */
+/*  Constants & state                                                   */
+/* ==================================================================== */
+const SRC_META = {
+  openalex: { emoji: '🧠', name: 'OpenAlex', api: true, desc: { ar: 'فهرس عالمي شامل (انطلق من مايكروسوفت وسكوباس)', en: 'Global scholarly index' } },
+  crossref: { emoji: '🏛️', name: 'Crossref', api: true, desc: { ar: 'مرجعيات DOIs والمجلات العلمية', en: 'DOIs & journals' } },
+  semantic: { emoji: '📡', name: 'Semantic Scholar', api: true, desc: { ar: 'بحث دلالي بالذكاء الاصطناعي من AI2', en: 'AI semantic search' } },
+  pubmed: { emoji: '🏥', name: 'PubMed', api: true, desc: { ar: 'العلوم الطبية والحياتية', en: 'Biomedical' } },
+  arxiv: { emoji: '🚀', name: 'arXiv', api: true, desc: { ar: 'أوراق قبل الطبع في الفيزياء والرياضيات والحاسوب', en: 'Preprints' } },
+  doaj: { emoji: '🌍', name: 'DOAJ', api: true, desc: { ar: 'المجلات العلمية مفتوحة الوصول', en: 'Open-access journals' } },
+  core: { emoji: '📦', name: 'CORE', api: true, keyNeeded: true, desc: { ar: 'أكبر تجمّع للمجلات المفتوحة', en: 'Aggregator' } },
+  gscholar: { emoji: '🎓', name: 'Google Scholar', api: false, desc: { ar: 'رابط بحث خارجي (لا توجد واجهة عامة)', en: 'External link' } },
+  base: { emoji: '🔍', name: 'BASE', api: false, desc: { ar: 'محرك بحث في المصادر الأكاديمية', en: 'Academic engine' } },
+  mandumah: { emoji: '🕌', name: 'منظومة', nameEn: 'Dar Al-Mandumah', api: false, desc: { ar: 'دار المنظومة للنشر والاستشهادات العربية', en: 'Arabic database' } },
+  shamaa: { emoji: '🕯️', name: 'شمعة', nameEn: 'SHAMAA', api: false, desc: { ar: 'المعلومات التربوية العربية', en: 'Arab educational info' } },
+  welib: { emoji: '📖', name: 'Welib', api: false, desc: { ar: 'مكتبة زايد الرقمية (الإمارات)', en: 'Zayed Digital Library' } },
+  worldcat: { emoji: '🌐', name: 'WorldCat', api: false, desc: { ar: 'فهرس المكتبات العالمي', en: 'Global library catalog' } },
+  batch: { emoji: '🔢', name: 'DOI Import', api: false, desc: { ar: 'مراجع مستوردة يدوياً عبر DOI', en: 'Manually imported via DOI' } },
+};
+const DEFAULT_API = ['openalex', 'crossref', 'semantic', 'pubmed', 'arxiv', 'doaj'];
+const SUGGESTIONS = LANG === 'ar'
+  ? ['الذكاء الاصطناعي في التعليم', 'المناهج الدراسية', 'الطاقة المتجددة', 'استدامة المدن', 'جودة الحياة', 'التراث الثقافي', 'التعلم عن بعد', 'اقتصاد المعرفة']
+  : ['machine learning', 'renewable energy', 'mental health', 'digital transformation', 'language acquisition', 'smart cities'];
+
+const LOGO_ZAWIA = '';
+const LOGO_ELEARN = '';
+
+const state = {
+  q: '', from: '', to: '', limit: 15,
+  checked: new Set(DEFAULT_API),
+  results: [], sources: [], errors: {}, externalList: [], activeSearch: 0,
+  selected: new Set(),
+  fmt: 'pdf', style: 'apa',
+  ai: {}, coreKey: '', semanticKey: '',
+  filters: { oaOnly: false, pdfOnly: false, peerOnly: false, savedOnly: false, source: null, concept: null, libyaAffil: false },
+  saved: new Set(), bilingual: null,
+  library: [], collections: [], activeCollection: null,
+  branding: { logo1: '', logo2: '', footer: '' },
+};
+function loadSaved() {
+  try { state.saved = new Set(JSON.parse(localStorage.getItem('am_saved') || '[]')); } catch (e) { state.saved = new Set(); }
+  loadLibrary();
+}
+function loadLibrary() {
+  try { state.library = JSON.parse(localStorage.getItem('am_library') || '[]'); } catch (e) { state.library = []; }
+  try { state.collections = JSON.parse(localStorage.getItem('am_collections') || '[]'); } catch (e) { state.collections = []; }
+  if (!state.collections.length) state.collections = [LANG === 'ar' ? 'عام' : 'General'];
+  if (!state.collections.includes(state.activeCollection)) state.activeCollection = state.collections[0];
+  state.saved = new Set(state.library.map((it) => it.key));
+}
+function persistLibrary() {
+  try {
+    localStorage.setItem('am_library', JSON.stringify(state.library));
+    localStorage.setItem('am_collections', JSON.stringify(state.collections));
+  } catch (e) {}
+}
+function savedKey(r) {
+  if (r.doi) return 'doi:' + String(r.doi).toLowerCase();
+  if (r.url) return 'url:' + r.url;
+  return 'rec:' + r.source + '|' + String(r.title || '').toLowerCase().slice(0, 90);
+}
+function isPeerReviewed(r) {
+  const ty = String(r.type || '').toLowerCase();
+  if (/preprint|posted-content|report|thesis|dissertation|dataset/.test(ty)) return false;
+  return ty === 'journal-article' || ty === 'article' || r.source === 'pubmed';
+}
+function toggleSave(r) {
+  const key = savedKey(r);
+  const idx = state.library.findIndex((it) => it.key === key);
+  if (idx > -1) {
+    state.library.splice(idx, 1);
+    state.saved.delete(key);
+    toast(t('unsavedToast'));
+  } else {
+    state.library.push({ key, collection: state.activeCollection || state.collections[0], note: '', savedAt: Date.now(), record: r });
+    state.saved.add(key);
+    toast(t('savedToast'), 'ok');
+  }
+  persistLibrary();
+}
+function renderCollectionSelect() {
+  const sel = $('selectCollection');
+  sel.innerHTML = state.collections.map((c) => `<option value="${esc(c)}" ${c === state.activeCollection ? 'selected' : ''}>${esc(c)}</option>`).join('');
+}
+function renderLibraryModal() {
+  renderCollectionSelect();
+  const list = $('libraryList');
+  if (!state.library.length) { list.innerHTML = `<div class="lib-empty">${esc(t('libraryEmpty'))}</div>`; return; }
+  const groups = {};
+  state.library.slice().sort((a, b) => b.savedAt - a.savedAt).forEach((it) => {
+    const c = it.collection || state.collections[0];
+    (groups[c] = groups[c] || []).push(it);
+  });
+  list.innerHTML = Object.keys(groups).map((cname) => {
+    const items = groups[cname].map((it) => {
+      const r = it.record;
+      const collOpts = state.collections.map((c) => `<option value="${esc(c)}" ${c === cname ? 'selected' : ''}>${esc(c)}</option>`).join('');
+      return `
+        <div class="lib-item" data-libkey="${esc(it.key)}">
+          <div class="lib-item-top">
+            <div>
+              <div class="lib-item-title">${esc(r.title || '(—)')}</div>
+              <div class="lib-item-meta">${esc((r.authors || []).join(', '))} ${r.year ? '• ' + r.year : ''} ${r.venue ? '• ' + esc(r.venue) : ''}</div>
+            </div>
+          </div>
+          ${it.note ? `<div class="lib-note">💡 ${esc(it.note)}</div>` : ''}
+          <div class="lib-item-actions">
+            ${r.url ? `<button type="button" data-lib-open="${esc(it.key)}">🔗 ${t('openSource')}</button>` : ''}
+            <button type="button" data-lib-annotate="${esc(it.key)}">✨ ${it.note ? t('regenNote') : t('aiAnnotate')}</button>
+            <select data-lib-move="${esc(it.key)}">${collOpts}</select>
+            <button type="button" data-lib-remove="${esc(it.key)}">🗑 ${t('remove')}</button>
+          </div>
+        </div>`;
+    }).join('');
+    return `<div class="lib-group"><h4 style="font-size:12.5px;color:var(--text2);font-weight:800;margin:10px 0 6px">📁 ${esc(cname)} (${groups[cname].length})</h4>${items}</div>`;
+  }).join('');
+
+  list.querySelectorAll('[data-lib-open]').forEach((el) => el.addEventListener('click', () => {
+    const it = state.library.find((x) => x.key === el.dataset.libOpen);
+    if (it && it.record) { const u = recordUrl(it.record); if (u) window.open(u, '_blank', 'noopener'); }
+  }));
+  list.querySelectorAll('[data-lib-remove]').forEach((el) => el.addEventListener('click', () => {
+    state.library = state.library.filter((x) => x.key !== el.dataset.libRemove);
+    state.saved.delete(el.dataset.libRemove);
+    persistLibrary(); renderLibraryModal(); renderResults();
+  }));
+  list.querySelectorAll('[data-lib-move]').forEach((el) => el.addEventListener('change', () => {
+    const it = state.library.find((x) => x.key === el.dataset.libMove);
+    if (it) { it.collection = el.value; persistLibrary(); renderLibraryModal(); }
+  }));
+  list.querySelectorAll('[data-lib-annotate]').forEach((el) => el.addEventListener('click', () => annotateLibraryItem(el.dataset.libAnnotate, el)));
+}
+async function annotateLibraryItem(key, btn) {
+  const it = state.library.find((x) => x.key === key);
+  if (!it) return;
+  const r = it.record;
+  const prevTxt = btn.textContent;
+  btn.textContent = '⏳ ' + t('working'); btn.disabled = true;
+  try {
+    if (state.ai.key) {
+      const sys = LANG === 'ar'
+        ? 'أنت مساعد أكاديمي. اكتب ملاحظة موجزة (2-3 أسطر) بالعربية تشرح أهمية هذا المرجع وفائدته المحتملة للباحث، بالاعتماد فقط على المعلومات المعطاة.'
+        : 'You are an academic assistant. Write a concise 2-3 line note explaining this reference\'s relevance and potential use for the researcher, based only on the given info.';
+      const user = `${r.title || ''}\n${(r.authors || []).join(', ')}\n${r.year || ''} ${r.venue || ''}\n${r.abstract ? r.abstract.slice(0, 600) : ''}`;
+      it.note = String(await askRemote(sys, user) || '').trim();
+    } else {
+      it.note = r.abstract ? r.abstract.slice(0, 220) + '…' : (LANG === 'ar' ? 'لا يوجد ملخص متاح لتوليد ملاحظة محلية؛ أضف مفتاح الذكاء الاصطناعي من الإعدادات لملاحظات أدق.' : 'No abstract available for a local note; add an AI key in Settings for better notes.');
+    }
+    persistLibrary(); renderLibraryModal();
+  } catch (e) {
+    toast(t('aiErr') + ' ' + (e.message || ''), 'err');
+    btn.textContent = prevTxt; btn.disabled = false;
+  }
+}
+
+const $ = (id) => document.getElementById(id);
+
+/* ==================================================================== */
+/*  Local storage settings                                              */
+/* ==================================================================== */
+function loadSettings() {
+  const s = {};
+  try { Object.assign(s, JSON.parse(localStorage.getItem('am_settings') || '{}')); } catch (e) {}
+  state.ai = { key: s.aiKey || '', base: s.aiBase || 'https://api.openai.com/v1', model: s.aiModel || 'gpt-4o-mini' };
+  state.coreKey = s.coreKey || '';
+  state.semanticKey = s.semKey || '';
+  state.limit = parseInt(s.limit, 10) || 15;
+  $('setAiKey').value = state.ai.key;
+  $('setAiBase').value = state.ai.base;
+  $('setAiModel').value = state.ai.model;
+  $('setCoreKey').value = state.coreKey;
+  $('setSemKey').value = state.semanticKey;
+  $('setLimit').value = String(state.limit);
+}
+function saveSettings() {
+  localStorage.setItem('am_settings', JSON.stringify({
+    aiKey: $('setAiKey').value.trim(), aiBase: $('setAiBase').value.trim() || 'https://api.openai.com/v1',
+    aiModel: $('setAiModel').value, coreKey: $('setCoreKey').value.trim(), semKey: $('setSemKey').value.trim(),
+    limit: parseInt($('setLimit').value, 10) || 15,
+  }));
+}
+function syncCoreHint() {
+  const saved = state.coreKey || '';
+  const typed = $('setCoreKey').value.trim();
+  $('coreUnsavedHint').classList.toggle('hidden', typed === saved);
+  $('coreKeyNotice').classList.toggle('hidden', !(state.checked.has('core') && !saved));
+}
+async function testCoreKey() {
+  const btn = $('btnTestCore');
+  const st = $('coreKeyStatus');
+  const key = $('setCoreKey').value.trim();
+  if (!key) { st.textContent = t('keyBad'); st.className = 'key-status bad'; return; }
+  btn.disabled = true;
+  const prev = btn.textContent;
+  btn.textContent = t('testingKey');
+  st.textContent = '';
+  try {
+    let ok = false;
+    try {
+      const res = await fetch('/api/test-core', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ coreKey: key }) });
+      const d = await res.json();
+      ok = !!(d && d.ok);
+    } catch (e) { ok = false; }
+    st.textContent = ok ? t('keyOk') : t('keyBad');
+    st.className = 'key-status ' + (ok ? 'ok' : 'bad');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = prev;
+  }
+}
+function loadUiPrefs() {
+  const l = localStorage.getItem('am_lang');
+  const th = localStorage.getItem('am_theme');
+  if (l === 'en' || l === 'ar') LANG = l;
+  if (th) document.documentElement.dataset.theme = th;
+}
+
+/* ==================================================================== */
+/*  Toast & helpers                                                     */
+/* ==================================================================== */
+function toast(msg, type = '') {
+  const w = $('toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.textContent = msg;
+  w.appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity .3s'; setTimeout(() => el.remove(), 320); }, 4000);
+}
+function escapeHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function esc(s) { return escapeHtml(s); }
+/* Records come from third-party APIs: a "javascript:" / "data:" URL must never reach href or window.open. */
+function safeUrl(u) { try { const x = new URL(String(u || ''), location.href); return /^https?:$/.test(x.protocol) ? x.href : ''; } catch (e) { return ''; } }
+function recordUrl(r) { return safeUrl(r.url) || (r.doi ? 'https://doi.org/' + encodeURI(String(r.doi)) : ''); }
+function isArabicText(s) { return /[\u0600-\u06FF]/.test(s || ''); }
+function doiLink(r) { return r.doi ? `https://doi.org/${encodeURIComponent(r.doi)}` : ''; }
+
+function typeLabel(raw) {
+  const m = { article: 'typeArticle', 'journal-article': 'typeJournalArticle', book: 'typeBook', bookSection: 'typeChapter', 'book-chapter': 'typeChapter', thesis: 'typeThesis', dissertation: 'typeDissertation', conference: 'typeConference', 'proceedings-article': 'typeProceedingsArticle', preprint: 'typePreprint', 'posted-content': 'typePostedContent', report: 'typeReport', paper: 'typePaper', dataset: 'typeDataset' };
+  return t(m[String(raw).toLowerCase()] || 'typeOther');
+}
+
+/* ==================================================================== */
+/*  Author name helpers                                                 */
+/* ==================================================================== */
+function parseName(name) {
+  const n = String(name || '').trim();
+  if (!n) return null;
+  if (isArabicText(n)) return { family: n, given: '', arabic: true };
+  const parts = n.split(/\s+/).filter(Boolean);
+  if (parts.length <= 1) return { family: n, given: '', arabic: false };
+  let i = parts.length - 1;
+  while (i >= 2 && NAME_PARTICLES.has(parts[i - 1].toLowerCase())) i--;   // "Jan van der Berg" -> family "van der Berg"
+  return { family: parts.slice(i).join(' '), given: parts.slice(0, i).join(' '), arabic: false };
+}
+const NAME_PARTICLES = new Set(['van', 'von', 'der', 'den', 'de', 'del', 'della', 'di', 'da', 'du', 'dos', 'das', 'le', 'la', 'el', 'al', 'bin', 'ibn', 'ter', 'ten']);
+const invert = (n) => (n.arabic ? n.family : n.given ? `${n.family}, ${n.given}` : n.family);
+/* APA / Harvard want initials: "Smith, J. A." (Chicago/RIS keep the full given name via invert) */
+const invertInit = (n) => (n.arabic ? n.family : n.given ? `${n.family}, ${initialStr(n.given)}` : n.family);
+const initialStr = (given) => given.split(/\s+/).map((w) => w[0] + '.').join(' ');
+
+function authorsList(authors) {
+  return (authors || []).map(parseName).filter(Boolean);
+}
+function joinInverted(aNames) {
+  if (!aNames.length) return t('yearUnknown') === 'n.d.' ? '[Author unknown]' : '[بلا مؤلف]';
+  const list = aNames.map(invert);
+  if (list.length === 1) return list[0];
+  if (list.length > 7) return list[0] + ' et al.';
+  return list.slice(0, -1).join(', ') + (LANG === 'ar' ? '، و ' : ' & ') + list[list.length - 1];
+}
+function joinInvertedInit(aNames) {
+  if (!aNames.length) return t('yearUnknown') === 'n.d.' ? '[Author unknown]' : '[بلا مؤلف]';
+  const list = aNames.map(invertInit);
+  if (list.length === 1) return list[0];
+  if (list.length > 7) return list[0] + ' et al.';
+  return list.slice(0, -1).join(', ') + (LANG === 'ar' ? '، و ' : ' & ') + list[list.length - 1];
+}
+function joinInvertedAmp(aNames) {
+  return aNames.map(invert).join(', ');
+}
+function joinIeee(aNames) {
+  const list = aNames.map((n) => (n.arabic ? n.family : n.given ? `${initialStr(n.given)} ${n.family}` : n.family));
+  if (list.length === 1) return list[0];
+  if (list.length > 6) return list[0] + ' et al.';
+  return list.join(', ');
+}
+function joinVancouver(aNames) {
+  return aNames.map((n) => (n.arabic ? n.family : n.given ? `${n.family} ${n.given.split(/\s+/).map((w) => w[0]).join('')}` : n.family)).join(', ');
+}
+
+/* ==================================================================== */
+/*  Citation styles                                                     */
+/* ==================================================================== */
+function apaRef(r) {
+  const a = authorsList(r.authors);
+  const authors = joinInvertedInit(a);
+  const year = r.year ? String(r.year) : t('yearUnknown');
+  const title = r.title || '';
+  const doi = doiLink(r);
+  const type = String(r.type || '').toLowerCase();
+  if (type.includes('book') && !type.includes('section') && !type.includes('chapter')) {
+    return `${authors} (${year}). *${title}*. ${r.publisher || ''}.`.replace(/\s+/g, ' ').trim();
+  }
+  if (type.includes('thesis') || type.includes('dissertation')) {
+    return `${authors} (${year}). *${title}* (أطروحة/رسالة). ${r.publisher || r.venue || ''}.`.replace(/\s+/g, ' ').trim();
+  }
+  let ref = `${authors} (${year}). ${title}.`;
+  const venue = r.venue ? ` *${r.venue}*` : '';
+  const vol = r.volume ? `, *${r.volume}*` : '';
+  const num = r.number ? `(${r.number})` : '';
+  const pages = r.pages ? `, pp. ${r.pages.replace(/^pp\.?/i, '')}` : '';
+  ref += (venue || vol || pages) ? `${venue}${vol}${num}${pages}.` : '';
+  if (doi) ref += ` https://doi.org/${r.doi}`;
+  else if (r.url) ref += ` ${r.url}`;
+  return ref.replace(/\s+/g, ' ').trim();
+}
+function harvardRef(r) {
+  const a = authorsList(r.authors);
+  const authors = joinInvertedInit(a);
+  const year = r.year || t('yearUnknown');
+  const venue = r.venue ? `, ${r.venue}` : '';
+  const vol = r.volume ? `, vol. ${r.volume}` : '';
+  const num = r.number ? `, no. ${r.number}` : '';
+  const pages = r.pages ? `, pp. ${r.pages.replace(/^pp\.?/i, '')}` : '';
+  const avail = r.doi ? `Available at: https://doi.org/${r.doi}` : r.url ? `Available at: ${r.url}` : '';
+  const acc = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  return `${authors} (${year}) '${r.title}'${venue}${vol}${num}${pages}. ${avail ? avail + ' (Accessed: ' + acc + ').' : ''}`.replace(/\s+/g, ' ').trim();
+}
+function mlaRef(r) {
+  const a = authorsList(r.authors);
+  const authorStr = () => {
+    if (!a.length) return '[unknown author]';
+    const list = a.map((n) => (n.arabic ? n.family : n.given ? `${n.family}, ${n.given}` : n.family));
+    return list.join(', ');
+  };
+  const venue = r.venue ? ` ${r.venue},` : '';
+  const vol = r.volume ? ` vol. ${r.volume},` : '';
+  const num = r.number ? ` no. ${r.number},` : '';
+  const link = r.doi ? ` https://doi.org/${r.doi}` : r.url ? ` ${r.url}` : '';
+  const yearStr = r.year ? String(r.year) : 'n.d.';
+  const pages = r.pages ? ` pp. ${r.pages.replace(/^pp\.?/i, '')}.` : '';
+  const yearComma = (r.pages || link) ? ` ${yearStr},` : ` ${yearStr}`;
+  const s = `${authorStr()}. "${r.title}."${venue}${vol}${num}${yearComma}${pages}${link}`.replace(/\s+/g, ' ').replace(/,\./g, '.').trim();
+  return s.endsWith('.') ? s : s + '.';
+}
+function chicagoRef(r) {
+  const a = authorsList(r.authors);
+  const authorStr = () => {
+    if (!a.length) return '[unknown author]';
+    const list = a.map((n) => (n.arabic ? n.family : n.given ? `${n.family}, ${n.given}` : n.family));
+    return list.join(', ');
+  };
+  const j = r.venue ? ` ${r.venue}` : '';
+  const vol = r.volume ? ` ${r.volume}` : '';
+  const num = r.number ? `, no. ${r.number}` : '';
+  const pages = r.pages ? `: ${r.pages.replace(/^pp\.?/i, '')}` : '';
+  const year = r.year ? `(${r.year})` : '(n.d.)';
+  const link = r.doi ? ` https://doi.org/${r.doi}` : r.url ? ` ${r.url}` : '';
+  return `${authorStr()}. "${r.title}."${j}${vol}${num} ${year}${pages}.${link}`.replace(/\s+/g, ' ').trim();
+}
+function ieeeRef(r, n) {
+  const a = authorsList(r.authors);
+  const authors = joinIeee(a);
+  const j = r.venue ? ` ${r.venue},` : '';
+  const vol = r.volume ? ` vol. ${r.volume},` : '';
+  const num = r.number ? ` no. ${r.number},` : '';
+  const pages = r.pages ? ` pp. ${r.pages.replace(/^pp\.?/i, '')},` : '';
+  const year = r.year ? ` ${r.year},` : '';
+  const doi = r.doi ? ` doi: ${r.doi}.` : '';
+  return `[${n}] ${authors}, "${r.title},"${j}${vol}${num}${pages}${year}${doi}`.replace(/\s+/g, ' ').trim();
+}
+function vancouverRef(r) {
+  const a = authorsList(r.authors);
+  const authors = joinVancouver(a);
+  const j = r.venue || '';
+  const vol = r.volume ? `${r.volume}` : '';
+  const num = r.number ? `(${r.number})` : '';
+  const pages = r.pages ? `:${r.pages.replace(/^pp\.?/i, '')}` : '';
+  const doi = r.doi ? `. doi: ${r.doi}` : '';
+  const s = `${authors}. ${r.title}. ${j}. ${r.year || ''};${vol}${num}${pages}${doi}`.replace(/\s+/g, ' ').trim();
+  return s.replace(/\.$/g, '') + '.';
+}
+function formatRef(r, style, n) {
+  let out;
+  switch (style) {
+    case 'apa': out = apaRef(r); break;
+    case 'harvard': out = harvardRef(r); break;
+    case 'mla': out = mlaRef(r); break;
+    case 'chicago': out = chicagoRef(r); break;
+    case 'chicagoAuthDate': {
+      const a = joinInverted(authorsList(r.authors));
+      const j = r.venue ? ` ${r.venue}` : '';
+      const vol = r.volume ? ` ${r.volume}` : '';
+      const num = r.number ? `(${r.number})` : '';
+      const pages = r.pages ? `: ${r.pages.replace(/^pp\.?/i, '')}` : '';
+      const doi = r.doi ? ` https://doi.org/${r.doi}` : r.url ? ` ${r.url}` : '';
+      out = `${a} ${r.year || '(n.d.)'}. "${r.title}."${j}${vol}${num}${pages}.${doi}`.replace(/\s+/g, ' ').trim();
+      break;
+    }
+    case 'ieee': out = ieeeRef(r, n); break;
+    case 'vancouver': out = vancouverRef(r); break;
+    case 'turabian': out = chicagoRef(r); break;
+    default: out = apaRef(r);
+  }
+  return out.replace(/\*/g, '');
+}
+
+/* ==================================================================== */
+/*  Export builders                                                     */
+/* ==================================================================== */
+function styleToLabel(style) {
+  const labels = { apa: 'APA', harvard: 'Harvard', mla: 'MLA', chicago: 'Chicago', chicagoAuthDate: 'Chicago (Author-Date)', ieee: 'IEEE', vancouver: 'Vancouver', turabian: 'Turabian' };
+  return labels[style] || style;
+}
+function referencize(records, style) {
+  return records.map((r, i) => formatRef(r, style, i + 1));
+}
+
+function sanitizeBib(s) {
+  return String(s == null ? '' : s).replace(/([{}&%#_])/g, '\\$1').replace(/[^\x20-\x7E\u00C0-\u024F\u0600-\u06FF]/g, '');
+}
+function bibType(r) {
+  const type = String(r.type || '').toLowerCase();
+  if (type.includes('thesis') || type.includes('dissertation')) return 'phdthesis';
+  if (type.includes('book') && (type.includes('section') || type.includes('chapter'))) return 'incollection';
+  if (type.includes('book')) return 'book';
+  if (type.includes('conference') || type.includes('proceedings')) return 'inproceedings';
+  if (type.includes('posted') || type.includes('preprint') || type.includes('arxiv')) return 'misc';
+  if (type.includes('report')) return 'techreport';
+  return 'article';
+}
+function makeKey(r, i) {
+  const a = authorsList(r.authors);
+  const fam = (a[0] && (a[0].arabic ? a[0].family.replace(/\s+/g, '') : a[0].family.replace(/[^A-Za-z]/g, ''))) || 'anon';
+  const year = r.year || 'nodate';
+  const word = (r.title || 'untitled').split(/\s+/)[0] || 'title';
+  const w = isArabicText(word) ? 'ar' : word.replace(/[^A-Za-z0-9]/g, '').slice(0, 6);
+  return `${fam}${year}${w}${i}`;
+}
+function buildBibtex(records) {
+  return records.map((r, i) => {
+    const authors = (r.authors || []).join(' and ');
+    const lines = [
+      `@${bibType(r)}{${makeKey(r, i)},`,
+      `  title = {${sanitizeBib(r.title)}},`,
+      r.authors && r.authors.length ? `  author = {${sanitizeBib(authors)}},` : '',
+      r.venue ? `  journal = {${sanitizeBib(r.venue)}},` : '',
+      r.year ? `  year = {${r.year}},` : '',
+      r.volume ? `  volume = {${r.volume}},` : '',
+      r.number ? `  number = {${r.number}},` : '',
+      r.pages ? `  pages = {${sanitizeBib(r.pages)}},` : '',
+      r.publisher ? `  publisher = {${sanitizeBib(r.publisher)}},` : '',
+      r.doi ? `  doi = {${r.doi}},` : '',
+      r.url ? `  url = {${r.url}},` : '',
+      '}',
+    ].filter(Boolean);
+    return lines.join('\n');
+  }).join('\n\n');
+}
+function risType(r) {
+  const type = String(r.type || '').toLowerCase();
+  if (type.includes('thesis') || type.includes('dissertation')) return 'THES';
+  if (type.includes('book') && (type.includes('section') || type.includes('chapter'))) return 'CHAP';
+  if (type.includes('book')) return 'BOOK';
+  if (type.includes('conference') || type.includes('proceedings')) return 'CONF';
+  if (type.includes('report')) return 'RPRT';
+  if (type.includes('preprint') || type.includes('posted')) return 'GEN';
+  return 'JOUR';
+}
+function buildRis(records) {
+  return records.map((r) => {
+    const lines = [`TY  - ${risType(r)}`];
+    (r.authors || []).forEach((a) => { const n = parseName(a); lines.push(`AU  - ${n ? invert(n) : ''}`); });
+    lines.push(`TI  - ${r.title || ''}`);
+    if (r.venue) lines.push(`JO  - ${r.venue}`);
+    lines.push(`PY  - ${r.year || ''}`);
+    if (r.volume) lines.push(`VL  - ${r.volume}`);
+    if (r.number) lines.push(`IS  - ${r.number}`);
+    if (r.pages) { const [sp, ep] = String(r.pages).split(/[-–—]/); lines.push(`SP  - ${(sp || '').trim()}`); if (ep) lines.push(`EP  - ${ep.trim()}`); }
+    if (r.publisher) lines.push(`PB  - ${r.publisher}`);
+    if (r.doi) lines.push(`DO  - ${r.doi}`);
+    if (r.url) lines.push(`UR  - ${r.url}`);
+    if (r.abstract) lines.push(`AB  - ${r.abstract}`);
+    if (r.keywords && r.keywords.length) lines.push(`KW  - ${r.keywords.join('; ')}`);
+    lines.push('ER  - ');
+    return lines.join('\n');
+  }).join('\n\n');
+}
+function buildCsv(records) {
+  const head = ['Title', 'Authors', 'Year', 'Journal', 'Volume', 'Issue', 'Pages', 'Publisher', 'DOI', 'URL', 'Type', 'Source', 'Abstract'];
+  const q = (v) => {
+    let s = String(v == null ? '' : v);
+    if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;   // titles come from external sources: stop Excel running them as formulas
+    return '"' + s.replace(/"/g, '""') + '"';
+  };
+  const rows = records.map((r) => [
+    q(r.title), q((r.authors || []).join('; ')), q(r.year), q(r.venue), q(r.volume), q(r.number), q(r.pages),
+    q(r.publisher), q(r.doi), q(r.url), q(typeLabel(r.type)), q(r.source), q(r.abstract),
+  ].join(','));
+  return '\uFEFF' + head.map(q).join(',') + '\n' + rows.join('\n');
+}
+function buildDoc(records, style) {
+  const refs = referencize(records, style);
+  const rows = records.map((r) => `
+    <tr>
+      <td>${esc(r.title || '')}</td>
+      <td>${esc((r.authors || []).join(', '))}</td>
+      <td>${esc(r.year || '')}</td>
+      <td>${esc(r.venue || '')}</td>
+      <td>${esc(r.doi || '')}</td>
+      <td>${esc(r.url || '')}</td>
+      <td>${esc(r.source || '')}</td>
+    </tr>`).join('');
+  return `<!DOCTYPE html>
+<html xmlns:w="urn:schemas-microsoft-com:office:word" lang="${dir()}" dir="${dir()}">
+<head><meta charset="utf-8"><title>${esc((state.q || 'references') + ' — ' + styleToLabel(style))}</title>
+<style>body{font-family:'Cairo','Segoe UI',Tahoma,sans-serif;font-size:12px} h1{color:#0e7490} h2{margin-top:18px;color:#0e7490} table{border-collapse:collapse;width:100%} th,td{border:1px solid #bbb;padding:4px 8px;text-align:start;vertical-align:top} th{background:#eef2f8} .refs{margin-top:14px} .refs li{margin-bottom:8px} .letterhead{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid #0e7490} .letterhead img{height:60px;width:auto} .letterhead-txt{text-align:center;font-size:12.5px;color:#333;line-height:1.7} .letterhead-txt b{font-size:14px;display:block}</style></head>
+<body>
+${letterheadHtml()}
+<h1>${esc(state.q || t('exportTitle'))}</h1>
+<p>${esc((LANG === 'ar' ? 'نظام التوثيق: ' : 'Citation style: ') + styleToLabel(style))} | ${esc(new Date().toLocaleString())}</p>
+<h2>${esc(LANG === 'ar' ? `المراجع المنسّقة (${records.length})` : 'Formatted references (' + records.length + ')')}</h2>
+<ul class="refs">${refs.map((x) => '<li>' + esc(x) + '</li>').join('')}</ul>
+<h2>${esc(LANG === 'ar' ? 'جدول البيانات' : 'Data table')}</h2>
+<table><tr><th>Title</th><th>Authors</th><th>Year</th><th>Journal</th><th>DOI</th><th>URL</th><th>Source</th></tr>${rows}</table>
+</body></html>`;
+}
+function buildJson(records) {
+  return JSON.stringify(records, null, 2);
+}
+
+function downloadBlob(name, content, mime) {
+  const blob = new Blob([content], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+function downloadFileForFmt(fmt, records) {
+  switch (fmt) {
+    case 'bibtex': return downloadBlob('references.bib', buildBibtex(records), 'application/x-bibtex');
+    case 'ris': return downloadBlob('references.ris', buildRis(records), 'application/x-research-info-systems');
+    case 'csv': return downloadBlob('references.csv', buildCsv(records), 'text/csv;charset=utf-8');
+    case 'json': return downloadBlob('references.json', buildJson(records), 'application/json');
+    case 'doc': return downloadBlob('references.doc', buildDoc(records, state.style), 'application/msword');
+    case 'pdf': return downloadBlob('references.txt', referencize(records, state.style).join('\n\n'), 'text/plain');
+  }
+}
+async function runDoiImport() {
+  var raw = $('doiTextarea').value;
+  var dois = raw.split(/[\n,;]+/).map(function(s){ return s.trim(); }).filter(Boolean)
+    .map(function(s){ var m = s.match(/10\.\d{4,9}\/[^\s"'<>]+/); return m ? m[0].replace(/[.,;]+$/, '') : null; })
+    .filter(Boolean);
+  dois = [...new Set(dois)];
+  var statusEl = $('doiImportStatus');
+  statusEl.classList.remove('hidden');
+  if (!dois.length) { statusEl.textContent = t('doiImportNone'); return; }
+  var runBtn = $('btnDoiImportRun');
+  runBtn.disabled = true;
+  var ok = 0, fail = 0, records = [];
+  for (var i = 0; i < dois.length; i++) {
+    statusEl.textContent = t('doiImportProgress') + ' (' + (i + 1) + '/' + dois.length + ')';
+    try {
+      var data = await sGetJson('https://api.crossref.org/works/' + encodeURIComponent(dois[i]) + '?mailto=research-platform@example.org', 12000, 1);
+      if (data && data.message) { records.push(crossrefItemToRec(data.message)); ok++; }
+      else fail++;
+    } catch (e) { fail++; }
+  }
+  records = dedupeRecords(records);
+  state.results = dedupeRecords(state.results.concat(records));
+  var idx = state.sources.findIndex(function(s){ return s.id === 'batch'; });
+  if (idx > -1) state.sources[idx].count += records.length;
+  else state.sources.push({ id: 'batch', count: records.length, ok: true, external: false });
+  statusEl.textContent = t('doiImportDone').replace('{ok}', ok).replace('{fail}', fail);
+  runBtn.disabled = false;
+  $('doiTextarea').value = '';
+  $('statusBar').classList.remove('hidden');
+  $('resultsToolbar').classList.remove('hidden');
+  renderResults();
+  toast(t('doiImportDone').replace('{ok}', ok).replace('{fail}', fail), fail ? 'err' : 'ok');
+}
+
+async function downloadZipBundle(records) {
+  if (typeof JSZip === 'undefined') { toast(t('zipErr'), 'err'); return; }
+  const btn = $('btnDownloadZip');
+  const prevTxt = btn.innerHTML;
+  btn.disabled = true; btn.innerHTML = '⏳ ' + t('zipBuilding');
+  try {
+    const zip = new JSZip();
+    zip.file('references.ris', buildRis(records));
+    zip.file('references.bib', buildBibtex(records));
+    zip.file('references.csv', buildCsv(records));
+    zip.file('references.json', buildJson(records));
+    zip.file('references.doc', buildDoc(records, state.style));
+    zip.file('اقرأني — كيفية الاستيراد.txt',
+      (LANG === 'ar'
+        ? 'لاستيراد هذه المراجع في EndNote أو Zotero أو Mendeley:\n1) فُك ضغط هذا الملف.\n2) افتح references.ris (أو references.bib) مباشرة بالنقر المزدوج — سيفتح البرنامج ويستوردها تلقائياً إذا كان مثبتاً على جهازك.\n3) بدلاً من ذلك، من داخل البرنامج اختر File > Import وحدد الملف المناسب.\n\nصيغة CSV وJSON للاستخدام العام، وWord للمعاينة والطباعة.'
+        : 'To import these references into EndNote, Zotero, or Mendeley:\n1) Unzip this file.\n2) Double-click references.ris (or references.bib) — the app will open and import it automatically if installed.\n3) Alternatively, use File > Import inside the app and pick the matching file.\n\nCSV and JSON are for general use; the Word file is for preview/printing.'));
+    const blob = await zip.generateAsync({ type: 'blob' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'ain-al-masdar-references.zip';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    toast(t('zipReady'), 'ok');
+  } catch (e) {
+    toast(t('zipErr'), 'err');
+  } finally {
+    btn.disabled = false; btn.innerHTML = prevTxt;
+  }
+}
+function letterheadHtml() {
+  const uniName = LANG === 'ar' ? 'جامعة الزاوية — مركز التعليم الإلكتروني' : 'University of Zawia — e-Learning Center';
+  const credit = LANG === 'ar' ? 'فكرة وتصميم: د. حسن الشيباني' : 'Concept & Design: Dr. Hassan Al-Shebani';
+  return `<div class="letterhead">
+    <img src="${LOGO_ZAWIA}" alt="University of Zawia">
+    <div class="letterhead-txt"><b>${esc(uniName)}</b><span>${esc(credit)}</span><br>${esc(t('brandName'))} — Ain Al-Masdar</div>
+    <img src="${LOGO_ELEARN}" alt="e-Learning Center">
+  </div>`;
+}
+function buildPrintArea(records) {
+  const refs = referencize(records, state.style);
+  const date = new Date().toLocaleString();
+  return `
+  <div class="pr-head">
+    <div class="pr-title">📚 ${t('brandName')} — ${t('exportTitle')}</div>
+    <div class="pr-sub">Ain Al-Masdar • ${styleToLabel(state.style)} • ${date}</div>
+  </div>
+  ${letterheadHtml()}
+  <div class="pr-query"><b>${esc(LANG === 'ar' ? 'موضوع البحث:' : 'Query:')}</b> ${esc(state.q)} ${state.from || state.to ? `(${esc(state.from || '…')} – ${esc(state.to || '…')})` : ''}</div>
+  <div class="pr-section">${esc(LANG === 'ar' ? 'المراجع المنسّقة' : 'Formatted references')} (${records.length})</div>
+  ${refs.map((r) => `<div class="pr-ref">${esc(r)}</div>`).join('')}
+  <div class="pr-section">${esc(LANG === 'ar' ? 'ملاحظة: احفظ هذا المستند كملف PDF من نافذة الطباعة' : 'Note: save this document as a PDF from the print dialog')}</div>`;
+}
+function doPrintPdf(records) {
+  const area = $('printArea');
+  area.innerHTML = buildPrintArea(records);
+  window.print();
+}
+
+/* ==================================================================== */
+/*  Export modal logic                                                  */
+/* ==================================================================== */
+function resolveExportRecords() {
+  const scope = $('exportScope').value;
+  if (scope === 'selected' && state.selected.size > 0) {
+    return state.results.filter((r) => state.selected.has(r.id));
+  }
+  if (scope === 'selected') toast(t('noSelection'));
+  return state.results.slice();
+}
+function updatePreview() {
+  const fmt = state.fmt;
+  const records = resolveExportRecords();
+  $('previewInfo').textContent = `${records.length} • ${styleToLabel(state.style)}`;
+  let text = '';
+  if (fmt === 'bibtex') text = buildBibtex(records);
+  else if (fmt === 'ris') text = buildRis(records);
+  else if (fmt === 'csv') text = buildCsv(records);
+  else if (fmt === 'json') text = buildJson(records);
+  else if (fmt === 'doc') text = (LANG === 'ar' ? 'مستند Word (نص منسَّق)' : 'Word document description') + '\n\n' + referencize(records, state.style).join('\n\n');
+  else if (fmt === 'pdf') text = referencize(records, state.style).join('\n\n');
+  text = text.replace(/\*\*/g, '').replace(/\*/g, ''); // strip md emphasis for preview
+  if (text.length > 8000) text = text.slice(0, 8000) + '\n…';
+  $('exportPreview').textContent = text || t('exportEmpty');
+}
+
+/* ==================================================================== */
+/*  Results rendering                                                   */
+/* ==================================================================== */
+function applyFilters(list) {
+  let arr = list;
+  const f = state.filters;
+  if (f.source) arr = arr.filter((r) => r.source === f.source);
+  if (f.oaOnly) arr = arr.filter((r) => !!r.openAccess);
+  if (f.pdfOnly) arr = arr.filter((r) => !!r.pdfUrl);
+  if (f.peerOnly) arr = arr.filter(isPeerReviewed);
+  if (f.savedOnly) arr = arr.filter((r) => state.saved.has(savedKey(r)));
+  if (f.concept) arr = arr.filter((r) => (r.keywords || []).some((k) => String(k).toLowerCase() === f.concept.toLowerCase()) || String(r.title || '').toLowerCase().includes(f.concept.toLowerCase()));
+  if (f.libyaAffil) arr = arr.filter((r) => r.source === 'openalex');
+  return arr;
+}
+function filteredResults() { return applyFilters(state.results.slice()); }
+function sortedResults() {
+  const sort = $('selectSort').value;
+  const arr = filteredResults();
+  if (sort === 'yearDesc') arr.sort((a, b) => (b.year || 0) - (a.year || 0));
+  else if (sort === 'yearAsc') arr.sort((a, b) => (a.year || 0) - (b.year || 0));
+  else if (sort === 'citations') arr.sort((a, b) => (b.citationCount || 0) - (a.citationCount || 0));
+  else if (sort === 'title') arr.sort((a, b) => String(a.title || '').localeCompare(String(b.title || ''), LANG === 'ar' ? 'ar' : 'en'));
+  return arr;
+}
+function buildConceptCloud() {
+  const freq = new Map();
+  state.results.forEach((r) => {
+    (r.keywords || []).forEach((k) => {
+      const key = String(k || '').trim();
+      if (!key || key.length < 2) return;
+      freq.set(key, (freq.get(key) || 0) + 1);
+    });
+  });
+  return [...freq.entries()].sort((a, b) => b[1] - a[1]).slice(0, 14).map((e) => e[0]);
+}
+function srcTagClass(id) {
+  return 'tag-' + id;
+}
+function renderCard(r, i) {
+  const url = recordUrl(r);
+  const abs = r.abstract ? esc(r.abstract) : '';
+  const oa = r.openAccess ? `<span class="oa-badge">🔓 ${t('oaBadge')}</span>` : '';
+  const peer = isPeerReviewed(r) ? `<span class="peer-badge">🏅 ${t('peerBadge')}</span>` : '';
+  const libya = (state.filters.libyaAffil && r.source === 'openalex') ? `<span class="libya-badge">🇱🇾 ${t('libyaBadge')}</span>` : '';
+  const retract = r.isRetracted ? `<span class="retract-badge">⚠️ ${t('retractedBadge')}</span>` : '';
+  const preprint = (!r.isRetracted && r.isPreprint) ? `<span class="preprint-badge">📝 ${t('preprintBadge')}</span>` : '';
+  const pdf = safeUrl(r.pdfUrl) ? `<a class="btn-src" href="${esc(safeUrl(r.pdfUrl))}" target="_blank" rel="noopener">📄 ${t('copyPdf')}</a>` : '';
+  const citeBtn = `<button class="btn-src" data-cite="${r.id}">✏️ ${t('cite')}</button>`;
+  const absBtn = abs ? `<button class="btn-src" data-abs="${r.id}">📄 ${t('viewAbstract')}</button>` : '';
+  const isSaved = state.saved.has(savedKey(r));
+  const saveBtn = `<button class="btn-save ${isSaved ? 'on' : ''}" data-save="${r.id}" title="${isSaved ? t('unsaveItem') : t('saveItem')}">${isSaved ? '⭐' : '☆'}</button>`;
+  const num = (i != null) ? `<div class="card-num">${String(i + 1).padStart(2, '0')}</div>` : '';
+  const metaBits = [
+    r.year ? `<b>${r.year}</b>` : '',
+    r.venue ? esc(r.venue) : '',
+    r.volume ? `vol. ${esc(r.volume)}` : '',
+    r.number ? `no. ${esc(r.number)}` : '',
+    r.pages ? `pp. ${esc(r.pages)}` : '',
+    r.citationCount != null && r.citationCount > 0 ? `<span title="${r.citationCount} ${t('citations')}">📈 ${r.citationCount}</span>` : '',
+    typeLabel(r.type),
+  ].filter(Boolean).join(' • ');
+  return `
+  <div class="card ${r.isRetracted ? 'is-retracted' : ''}" id="card-${r.id}">
+    <div class="card-top">
+      ${num}
+      <input type="checkbox" class="check" data-sel="${r.id}" ${state.selected.has(r.id) ? 'checked' : ''} title="${t('exportSelected')}">
+      <div class="card-main">
+        <div class="card-src-tag-row">
+          <span class="src-tag ${srcTagClass(r.source)}">${SRC_META[r.source] ? SRC_META[r.source].name : r.source}</span>
+          ${oa}${peer}${libya}${retract}${preprint}
+        </div>
+        <div class="card-title" data-open="${r.id}" ${url ? `role="link" title="${t('openSource')}"` : ''}>${esc(r.title || '(—)')}</div>
+        ${r.isRetracted ? `<div class="retract-alert">⚠️ ${t('retractedAlert')}</div>` : ''}
+        <div class="card-meta">${r.authors && r.authors.length ? esc(r.authors.join(', ')) : ''}</div>
+        <div class="card-meta">${metaBits}</div>
+        <div class="card-abstract" id="abs-${r.id}">${abs || ''}</div>
+        <div class="card-actions">
+          ${url ? `<a class="btn-open" href="${esc(url)}" target="_blank" rel="noopener">🔗 ${t('openSource')}</a>` : ''}
+          ${r.doi ? `<span class="doi-text">DOI: ${esc(r.doi)}</span>` : ''}
+          ${pdf}${absBtn}${citeBtn}${saveBtn}
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+function dispName(m) { return LANG === 'ar' ? (m.name || m.nameEn || m.name) : (m.nameEn || m.name); }
+function resultSortLabel(id) { return SRC_META[id] ? dispName(SRC_META[id]) : id; }
+
+function buildYearHistogram(results) {
+  const counts = new Map();
+  results.forEach((r) => { if (r.year) counts.set(r.year, (counts.get(r.year) || 0) + 1); });
+  const years = [...counts.keys()].sort((a, b) => a - b);
+  return years.map((y) => ({ year: y, count: counts.get(y) }));
+}
+function topEntities(results, getter, n) {
+  const freq = new Map();
+  results.forEach((r) => { (getter(r) || []).forEach((v) => { const k = String(v || '').trim(); if (!k) return; freq.set(k, (freq.get(k) || 0) + 1); }); });
+  return [...freq.entries()].sort((a, b) => b[1] - a[1]).slice(0, n);
+}
+function renderAnalytics() {
+  const panel = $('analyticsPanel');
+  const results = state.results;
+  if (!results.length) { panel.innerHTML = ''; return; }
+  const hist = buildYearHistogram(results);
+  const maxC = Math.max(1, ...hist.map((h) => h.count));
+  const bars = hist.map((h) => `
+    <div class="an-bar-wrap" title="${h.year}: ${h.count}">
+      <span class="an-bar-count">${h.count}</span>
+      <div class="an-bar" style="height:${Math.max(4, Math.round((h.count / maxC) * 90))}px"></div>
+      <span class="an-bar-label">${h.year}</span>
+    </div>`).join('');
+  const authors = topEntities(results, (r) => r.authors, 6);
+  const venues = topEntities(results, (r) => (r.venue ? [r.venue] : []), 6);
+  panel.innerHTML = `
+    <div class="an-block">
+      <h4>📈 ${t('anYears')}</h4>
+      <div class="an-bars">${bars || `<span style="font-size:12px;color:var(--text2)">${esc(t('noConceptsYet'))}</span>`}</div>
+    </div>
+    <div class="an-block">
+      <h4>✍️ ${t('anAuthors')}</h4>
+      <ul class="an-list">${authors.map(([a, c]) => `<li><span>${esc(a)}</span><b>${c}</b></li>`).join('') || `<li>${esc(t('noConceptsYet'))}</li>`}</ul>
+    </div>
+    <div class="an-block">
+      <h4>📚 ${t('anVenues')}</h4>
+      <ul class="an-list">${venues.map(([v, c]) => `<li><span>${esc(v)}</span><b>${c}</b></li>`).join('') || `<li>${esc(t('noConceptsYet'))}</li>`}</ul>
+    </div>`;
+}
+function renderConceptsPanel() {
+  const panel = $('conceptsPanel');
+  const grid = $('conceptsGrid');
+  const concepts = buildConceptCloud();
+  if (!state.results.length || !concepts.length) { panel.classList.add('hidden'); grid.innerHTML = ''; return; }
+  panel.classList.remove('hidden');
+  grid.innerHTML = concepts.map((c) => `<button type="button" class="concept-chip ${state.filters.concept === c ? 'on' : ''}" data-concept="${esc(c)}">${esc(c)}</button>`).join('');
+  grid.querySelectorAll('[data-concept]').forEach((el) => {
+    el.addEventListener('click', () => {
+      state.filters.concept = (state.filters.concept === el.dataset.concept) ? null : el.dataset.concept;
+      renderResults();
+    });
+  });
+}
+function renderFiltersBar() {
+  const bar = $('filtersBar');
+  if (!state.results.length) { bar.classList.add('hidden'); return; }
+  bar.classList.remove('hidden');
+  const f = state.filters;
+  bar.querySelectorAll('[data-filter]').forEach((btn) => btn.classList.toggle('on', !!f[btn.dataset.filter]));
+  const anyOn = f.oaOnly || f.pdfOnly || f.peerOnly || f.savedOnly || f.source || f.concept;
+  $('btnClearFilters').classList.toggle('hidden', !anyOn);
+}
+function renderResults() {
+  const list = $('resultsList');
+  const sorted = sortedResults();
+  renderFiltersBar();
+  renderConceptsPanel();
+  if (!$('analyticsPanel').classList.contains('hidden')) renderAnalytics();
+  if (!sorted.length) {
+    list.innerHTML = state.results.length
+      ? `<div class="empty"><div class="empty-ico">🔎</div><div class="empty-txt">${esc(t('noResults'))}</div></div>`
+      : '';
+    updateToolbar();
+    return;
+  }
+  list.innerHTML = sorted.map((r, i) => renderCard(r, i)).join('');
+
+  list.querySelectorAll('[data-save]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const r = state.results.find((x) => x.id === el.dataset.save);
+      if (!r) return;
+      toggleSave(r);
+      renderResults();
+    });
+  });
+  list.querySelectorAll('[data-open]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const r = state.results.find((x) => x.id === el.dataset.open);
+      if (r) { const u = recordUrl(r); if (u) window.open(u, '_blank'); }
+    });
+  });
+  list.querySelectorAll('[data-abs]').forEach((el) => {
+    el.addEventListener('click', () => { const b = $('abs-' + el.dataset.abs); if (b) { b.classList.toggle('open'); el.textContent = b.classList.contains('open') ? t('hideAbstract') : '📄 ' + t('viewAbstract'); } });
+  });
+  list.querySelectorAll('[data-cite]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const r = state.results.find((x) => x.id === el.dataset.cite);
+      if (r) { const text = formatRef(r, state.style, 1); try { navigator.clipboard.writeText(text).then(() => toast(t('copied'), 'ok')); } catch (e) {} }
+    });
+  });
+  list.querySelectorAll('[data-sel]').forEach((el) => {
+    el.addEventListener('change', (ev) => {
+      const id = el.dataset.sel;
+      if (ev.target.checked) state.selected.add(id); else state.selected.delete(id);
+      updateToolbar();
+    });
+  });
+  updateToolbar();
+}
+function renderExternalLinks() {
+  const block = $('externalBlock');
+  if (!state.externalList.length) { block.classList.add('hidden'); block.querySelector('#externalLinks').innerHTML = ''; return; }
+  block.classList.remove('hidden');
+  $('externalLinks').innerHTML = state.externalList.map((e) => {
+    const m = SRC_META[e.id] || {};
+    return `<a class="ext-btn" href="${esc(safeUrl(e.url) || '#')}" target="_blank" rel="noopener"><span class="ext-ico">${m.emoji || '🔗'}</span> ${esc(dispName(m) || e.id)} <small>↗</small></a>`;
+  }).join('');
+}
+function updateToolbar() {
+  const shown = filteredResults().length;
+  const total = state.results.length;
+  $('resCount').textContent = (shown !== total)
+    ? `${shown} ${t('filteredOf')} ${total} ${t('filteredClose')}`
+    : `${total} ${t('resultsOf')} ${state.sources.length} ${t('sourcesPlural')}`;
+  const all = state.results.every((r) => state.selected.has(r.id));
+  $('checkSelectAll').checked = !!state.results.length && all;
+  $('checkSelectAll').indeterminate = !all && state.selected.size > 0;
+}
+
+/* ==================================================================== */
+/*  Search                                                              */
+/* ==================================================================== */
+function checkYears() {
+  const from = $('selectFrom').value, to = $('selectTo').value;
+  if (from && to && parseInt(from, 10) > parseInt(to, 10)) { toast(LANG === 'ar' ? 'سنة البداية أكبر من سنة النهاية' : 'From year is greater than to year', 'err'); return false; }
+  return true;
+}
+async function doSearch() {
+  const q = $('inputQ').value.trim();
+  if (!q) { toast(LANG === 'ar' ? 'أدخل موضوع البحث أولاً' : 'Enter a topic first', 'err'); $('inputQ').focus(); return; }
+  if (!checkYears()) return;
+  const from = $('selectFrom').value, to = $('selectTo').value;
+  const apiSources = [...state.checked].filter((id) => SRC_META[id] && SRC_META[id].api);
+  const externalIDs = [...state.checked].filter((id) => SRC_META[id] && !SRC_META[id].api);
+
+  state.q = q; state.from = from; state.to = to;
+  state.selected.clear();
+  const token = ++state.activeSearch;
+
+  $('loading').classList.remove('hidden');
+  $('empty').classList.add('hidden');
+  $('statusBar').classList.add('hidden');
+  $('resultsToolbar').classList.add('hidden');
+  $('resultsList').innerHTML = '';
+  $('externalBlock').classList.add('hidden');
+
+  let payload = { q, fromYear: from || null, toYear: to || null, sources: apiSources.concat(externalIDs), limit: state.limit };
+  if (state.coreKey) payload.coreKey = state.coreKey;
+  if (state.semanticKey) payload.semanticKey = state.semanticKey;
+
+  try {
+    const res = await fetch('/api/search', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (token !== state.activeSearch) return;
+    if (res.status !== 200 && !data.results) throw new Error(data.error || 'server error');
+
+    state.results = data.results || [];
+    state.sources = data.sources || [];
+    state.errors = data.errors || {};
+    state.externalList = (data.externalList && data.externalList.length) ? data.externalList : externalIDs.map((id) => ({ id, url: extGuess(id, q) }));
+
+    $('statusBar').classList.remove('hidden');
+    $('statusMsg').textContent = state.results.length
+      ? `${t('foundIn')} ${state.results.length} ${t('resultsOf')} ${state.sources.filter((s) => s.count > 0).length} ${t('sourcesPlural')} "${q}"`
+      : t('noResults');
+    $('perSource').innerHTML = state.sources.map((s) => {
+      const cls = s.ok ? (s.count ? 'dot' : 'dot zero') : 'dot bad';
+      return `<span class="ps"><span class="${cls}"></span>${esc(resultSortLabel(s.id))}: ${s.count}</span>`;
+    }).join('');
+    const errEntries = Object.entries(state.errors);
+    if (errEntries.length) {
+      const errHtml = errEntries.map(([id, m]) => {
+        const hint = m === 'HTTP 429' ? `<span class="dot bad"></span><small style="color:var(--text2)"> (${t('tooltip429Rate')})</small>` : '';
+        return `<span class="ps"><span class="dot bad"></span>${esc(resultSortLabel(id))}: ❌${hint}</span>`;
+      }).join('');
+      $('perSource').innerHTML += `<span class="ps">${t('errorSources')}</span> ${errHtml}`;
+    }
+    if (state.results.length) $('resultsToolbar').classList.remove('hidden');
+    if (!state.results.length) {
+      $('empty').classList.remove('hidden');
+      $('emptyTxt').innerHTML = `<b>${t('noResults')}</b><br>${t('tryAgain')}`;
+    }
+    renderResults();
+    renderExternalLinks();
+  } catch (e) {
+    if (token !== state.activeSearch) return;
+    $('empty').classList.remove('hidden');
+    $('emptyTxt').textContent = String(e.message || e);
+  } finally {
+    if (token === state.activeSearch) $('loading').classList.add('hidden');
+  }
+}
+function extGuess(id, q) {
+  const base = {
+    gscholar: 'https://scholar.google.com/scholar?q=',
+    base: 'https://www.base-search.net/Search/Results?lookfor=',
+    mandumah: 'https://search.mandumah.com/quick_results?searchfield=',
+    shamaa: 'https://www.shamaa.org/ar/',
+    welib: 'https://welib.ae/',
+    worldcat: 'https://search.worldcat.org/search?q=',
+  };
+  const u = base[id];
+  if (/^shamaa|^welib/.test(id)) return u;
+  return (u || 'https://www.google.com/search?q=') + encodeURIComponent(q);
+}
+
+/* ==================================================================== */
+/*  Sources grid                                                        */
+/* ==================================================================== */
+function buildSourcesGrid() {
+  const grid = $('sourcesGrid');
+  grid.innerHTML = Object.entries(SRC_META).map(([id, m]) => {
+    const on = state.checked.has(id) ? 'on' : 'off';
+    const name = m.nameEn && LANG === 'ar' ? `<span class="sc-name">${m.name} <small style="opacity:.7">(${m.nameEn})</small></span>` : `<span class="sc-name">${dispName(m)}</span>`;
+    const meta = m.api ? (m.keyNeeded ? m.desc[LANG] + ' 🔑' : m.desc[LANG]) : '↗ ' + m.desc[LANG];
+    return `<div class="src-chip ${on}" data-src="${id}" tabindex="0" role="checkbox" aria-checked="${on === 'on'}">
+      <span class="sc-box"></span><span class="sc-logo">${m.emoji}</span>
+      <span>${name}<span class="sc-meta">${esc(meta)}</span></span>
+    </div>`;
+  }).join('');
+  grid.querySelectorAll('.src-chip').forEach((chip) => {
+    const toggle = () => {
+      const id = chip.dataset.src;
+      if (state.checked.has(id)) state.checked.delete(id); else state.checked.add(id);
+      chip.classList.toggle('on', state.checked.has(id));
+      chip.classList.toggle('off', !state.checked.has(id));
+      chip.setAttribute('aria-checked', state.checked.has(id));
+      $('coreKeyNotice').classList.toggle('hidden', !(state.checked.has('core') && !state.coreKey));
+      updateAllSourcesBtn();
+    };
+    chip.addEventListener('click', toggle);
+    chip.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  });
+  $('coreKeyNotice').classList.toggle('hidden', !(state.checked.has('core') && !state.coreKey));
+  updateAllSourcesBtn();
+}
+function updateAllSourcesBtn() {
+  const on = [...state.checked].filter((id) => SRC_META[id]).length;
+  const all = Object.keys(SRC_META).length;
+  $('btnAllSources').textContent = on === all ? t('deselectAll') : t('selectAll');
+}
+
+/* ==================================================================== */
+/*  AI                                                                  */
+/* ==================================================================== */
+function recordsForAi() {
+  if (state.selected.size) return state.results.filter((r) => state.selected.has(r.id));
+  return state.results.slice();
+}
+async function askRemote(system, user) {
+  const res = await fetch('/api/ai', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ apiKey: state.ai.key, baseUrl: state.ai.base, model: state.ai.model, messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error === 'ai_key_missing' ? 'ai_key_missing' : (data.detail ? (JSON.stringify(data.detail) || data.error) : data.error));
+  return data.content || '';
+}
+function recordsContext(records) {
+  if (!records.length) return '';
+  const lines = records.slice(0, 30).map((r, i) => `${i + 1}. ${r.title} | ${r.authors ? r.authors.join(', ') : ''} | ${r.year || ''} | ${r.venue || ''} | ${r.doi ? 'doi:' + r.doi : ''} | source:${r.source} | citations:${r.citationCount || 0}`);
+  return `\n\nالنتائج (${records.length}):\n` + lines.join('\n');
+}
+function systemPrompt() {
+  return LANG === 'ar'
+    ? 'أنت مساعد أكاديمي خبير في البحث العلمي. أجِب بالعربية بلهجة أكاديمية دقيقة ومنظمة (نقاط أو فقرات قصيرة). لا تخترع مراجع غير موجودة في النتائج المقدمة، واستخدم التفاصيل الحقيقية (العناوين، المؤلفون، السنوات، المجلات، DOIs).'
+    : 'You are an expert academic research assistant. Answer in English, precise and structured (bullet points or short paragraphs). Do not invent references that do not exist in the provided results; use the real details (titles, authors, years, venues, DOIs).';
+}
+async function runAi(kind, customText) {
+  const records = recordsForAi();
+  if (!state.results.length) { addAiMsg(t('searchFirst'), 'system'); return; }
+  const ctx = recordsContext(records.slice(0, 30));
+  let user;
+  if (kind === 'intro') user = `اكتب مقدمة بحثية احترافية مترابطة (8-12 سطراً) حول الموضوع: "${state.q}" مع الإشارة لبعض المصادر الحقيقية.${ctx}`;
+  else if (kind === 'summary') user = `قدّم ملخصًا شاملًا ومنظّمًا حول الموضوع "${state.q}" مع تنظيم النتائج ضمن ثيمات ونقاط، واذكر أهم 5 مصادر بدقة (مع DOIs).${ctx}`;
+  else if (kind === 'gap') user = `حدّد الفجوات البحثية والفرص غير المستكشفة في الموضوع "${state.q}" استناداً إلى النتائج المقدمة فقط.${ctx}`;
+  else if (kind === 'best') user = `قيّم النتائج واختر أهم المصادر الموصى بها (5-8) مرتبة، مع تبرير موجز لكل منها (الأهمية، الاستشهادات، الوصول المفتوح).${ctx}`;
+  else user = customText + ctx;
+
+  if (state.ai.key) {
+    try {
+      addAiMsg(await askRemote(systemPrompt(), user), 'assistant');
+    } catch (e) {
+      addAiMsg(`${t('aiErr')} ${e.message === 'ai_key_missing' ? t('noAiKey') : e.message}. ${t('retryHint')}`, 'system');
+      if (e.message !== 'ai_key_missing') localFallback(kind, records);
+    }
+  } else {
+    addAiMsg(t('noAiKey') + '\n', 'system');
+    localFallback(kind, records);
+  }
+}
+function localFallback(kind, records) {
+  if (kind === 'intro') {
+    const years = records.map((r) => r.year).filter(Boolean);
+    const range = years.length ? `${Math.min(...years)}–${Math.max(...years)}` : '—';
+    addAiMsg(`(خلاصة محلية) عن موضوع «${state.q}». اعتمدت المنصة على ${records.length} مصدراً علمياً من الفترة ${range}، تغطي جوانب نظرية وتطبيقية. يُنصح بالاطلاع على المصادر أعلاه وترتيبها في قائمة مراجع عبر أنظمة التوثيق المدعومة.`, 'assistant');
+  } else if (kind === 'summary') {
+    const abs = records.filter((r) => r.abstract).slice(0, 6).map((r) => `• ${r.title}: ${r.abstract.replace(/\s+/g, ' ').slice(0, 180)}…`).join('\n');
+    addAiMsg(`(خلاصة استخلاصية محلية من ${records.length} نتيجة) عدم توفر مفتاح ذكاء اصطناعي يمنع التحليل العميق، إليك أهم الملخصات:\n${abs || 'لا توجد ملخصات كاملة في النتائج.'}`, 'assistant');
+  } else if (kind === 'gap') {
+    const years = records.map((r) => r.year).filter(Boolean);
+    const recent = years.filter((y) => y && y >= (new Date().getFullYear() - 3)).length;
+    addAiMsg(`(تقدير محلي) من بين ${records.length} نتيجة، ${recent} صادرة في السنوات الثلاث الأخيرة — الشائع أن الفجوات تتركز حول التطبيقات الميدانية، والدراسات المقارنة بين الدول العربية والغربية، والمجالات متعددة التخصصات. للحصول على تحليل دقيق اعتمد على مفتاح الذكاء الاصطناعي.`, 'assistant');
+  } else if (kind === 'best') {
+    const ranked = records.slice().sort((a, b) => (b.citationCount || 0) - (a.citationCount || 0)).slice(0, 5);
+    addAiMsg(`${t('bestLocal')}\n${ranked.map((r) => `• ${r.title} (${r.year || '—'}) — ${(r.authors || [])[0] || ''} [${SRC_META[r.source] ? SRC_META[r.source].name : r.source}]`).join('\n')}`, 'assistant');
+  } else {
+    const q = customText || '';
+    const counts = {};
+    records.forEach((r) => { counts[r.source] = (counts[r.source] || 0) + 1; });
+    addAiMsg(`(رد محلي) لديك ${records.length} نتيجة ضمن: ${Object.entries(counts).map(([k, v]) => `${SRC_META[k] ? SRC_META[k].name : k} (${v})`).join('، ')}. أعد صياغة سؤالك أو أضف مفتاح الذكاء الاصطناعي من الإعدادات للحصول على إجابة تحليلية دقيقة.`, 'assistant');
+  }
+}
+function addAiMsg(text, role) {
+  const log = $('aiLog');
+  const el = document.createElement('div');
+  el.className = 'ai-msg ' + role;
+  el.textContent = text;
+  log.appendChild(el);
+  log.scrollTop = log.scrollHeight;
+  return el;
+}
+
+/* ==================================================================== */
+/*  Init                                                                */
+/* ==================================================================== */
+function populateYears() {
+  const cur = new Date().getFullYear();
+  const f = $('selectFrom'), to = $('selectTo');
+  const opts = (sel, rev) => {
+    const years = [];
+    for (let y = 1950; y <= cur; y++) years.push(y);
+    if (rev) years.reverse();
+    sel.innerHTML = `<option value="">${t('allYears')}</option>` + years.map((y) => `<option value="${y}">${y}</option>`).join('');
+  };
+  opts(f, false); opts(to, true);
+  f.value = ''; to.value = '';
+}
+function renderSuggestions() {
+  const list = (LANG === 'ar' ? ['الذكاء الاصطناعي في التعليم', 'تطوير المناهج', 'الطاقة المتجددة', 'استدامة المدن', 'جودة الحياة', 'التعلم عن بعد'] : ['machine learning', 'renewable energy', 'mental health', 'digital transformation', 'smart cities', 'language acquisition']);
+  $('suggestChips').innerHTML = '<span class="chip" style="border:none;background:none;cursor:default;font-size:12.5px">' + t('quickSuggest') + '</span>'
+    + list.map((s) => `<button class="chip" data-sug="${esc(s)}">${esc(s)}</button>`).join('');
+  $('suggestChips').querySelectorAll('[data-sug]').forEach((b) => { b.addEventListener('click', () => { $('inputQ').value = b.dataset.sug; doSearch(); }); });
+}
+
+async function refreshIps() {
+  try {
+    const res = await fetch('/api/ip');
+    const d = await res.json();
+    $('localUrl').textContent = `https://localhost:${d.httpsPort || 8443}/`;
+    $('netUrl').textContent = d.addrs.length ? `https://${d.addrs[0].address}:${d.httpsPort || 8443}/` : '—';
+  } catch (e) {}
+}
+
+function bindUi() {
+  $('btnSearch').addEventListener('click', doSearch);
+  $('inputQ').addEventListener('keydown', (e) => { if (e.key === 'Enter') doSearch(); });
+  $('selectFrom').addEventListener('change', checkYears);
+  $('selectTo').addEventListener('change', checkYears);
+  $('selectSort').addEventListener('change', renderResults);
+  $('checkSelectAll').addEventListener('change', (e) => {
+    state.selected.clear();
+    if (e.target.checked) state.results.forEach((r) => state.selected.add(r.id));
+    renderResults();
+  });
+  $('btnClearSel').addEventListener('click', () => { state.selected.clear(); renderResults(); });
+  $('btnAnalytics').addEventListener('click', () => {
+    const panel = $('analyticsPanel');
+    panel.classList.toggle('hidden');
+    if (!panel.classList.contains('hidden')) renderAnalytics();
+  });
+  $('chkLibyaAffil').addEventListener('change', (e) => {
+    state.filters.libyaAffil = e.target.checked;
+    $('libyaHint').classList.toggle('on', e.target.checked);
+    if (state.results.length) { if (state.q) doSearch(); else renderResults(); }
+  });
+  document.querySelectorAll('#filtersBar [data-filter]').forEach((btn) => {
+    btn.addEventListener('click', () => { state.filters[btn.dataset.filter] = !state.filters[btn.dataset.filter]; renderResults(); });
+  });
+  $('btnClearFilters').addEventListener('click', () => {
+    state.filters = { oaOnly: false, pdfOnly: false, peerOnly: false, savedOnly: false, source: null, concept: null, libyaAffil: false };
+    const la = $('chkLibyaAffil'); if (la) la.checked = false;
+    renderResults();
+  });
+  $('btnCopyLink').addEventListener('click', () => {
+    if (!state.q) { toast(t('copyLinkEmpty'), 'err'); return; }
+    let link = location.href.split('#')[0] + '#q=' + encodeURIComponent(state.q);
+    if (state.from) link += '|' + state.from + (state.to ? '|' + state.to : '');
+    try { navigator.clipboard.writeText(link).then(() => toast(t('copyLinkOk'), 'ok')); } catch (e) {}
+  });
+  $('btnCopyRefs').addEventListener('click', () => {
+    const records = resolveExportRecords();
+    if (!records.length) { toast(t('exportEmpty'), 'err'); return; }
+    const text = referencize(records, state.style).join('\n\n');
+    try { navigator.clipboard.writeText(text).then(() => toast(t('copyRefsOk'), 'ok')); } catch (e) {}
+  });
+  $('btnAllSources').addEventListener('click', () => {
+    const all = Object.keys(SRC_META);
+    const onAll = all.every((id) => state.checked.has(id));
+    if (onAll) all.forEach((id) => state.checked.delete(id)); else all.forEach((id) => state.checked.add(id));
+    buildSourcesGrid();
+  });
+  $('btnResetSources').addEventListener('click', () => {
+    state.checked = new Set(DEFAULT_API);
+    buildSourcesGrid();
+  });
+
+  // language & theme
+  $('btnLang').addEventListener('click', () => { LANG = LANG === 'ar' ? 'en' : 'ar'; localStorage.setItem('am_lang', LANG); applyI18n(); buildSourcesGrid(); renderSuggestions(); populateYears(); updateAllSourcesBtn(); renderResults(); });
+  $('btnTheme').addEventListener('click', () => {
+    const cur = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = cur;
+    localStorage.setItem('am_theme', cur);
+    $('btnTheme').querySelector('.ico').textContent = cur === 'dark' ? '☀️' : '🌙';
+  });
+
+  // settings
+  $('btnSettings').addEventListener('click', () => $('settingsModal').classList.remove('hidden'));
+  $('btnSaveSettings').addEventListener('click', () => {
+    saveSettings();
+    loadSettings();
+    $('settingsModal').classList.add('hidden');
+    $('coreKeyNotice').classList.toggle('hidden', !(state.checked.has('core') && !state.coreKey));
+    syncCoreHint();
+    toast(LANG === 'ar' ? 'تم حفظ الإعدادات' : 'Settings saved', 'ok');
+  });
+  $('btnTestCore').addEventListener('click', testCoreKey);
+  $('setCoreKey').addEventListener('input', syncCoreHint);
+
+  // export modal
+  const exportBtn = $('btnExport');
+  exportBtn.addEventListener('click', () => { $('exportModal').classList.remove('hidden'); updatePreview(); });
+  document.querySelectorAll('.fmt-tab').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.fmt-tab').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.fmt = btn.dataset.fmt;
+      $('btnPrintPdf').classList.toggle('hidden', state.fmt !== 'pdf');
+      updatePreview();
+    });
+  });
+  $('exportStyle').addEventListener('change', () => { state.style = $('exportStyle').value; updatePreview(); });
+  $('exportScope').addEventListener('change', updatePreview);
+  $('btnDownload').addEventListener('click', () => {
+    const records = resolveExportRecords();
+    if (!records.length) { toast(t('exportEmpty'), 'err'); return; }
+    downloadFileForFmt(state.fmt, records);
+  });
+  $('btnDownloadZip').addEventListener('click', () => {
+    const records = resolveExportRecords();
+    if (!records.length) { toast(t('exportEmpty'), 'err'); return; }
+    downloadZipBundle(records);
+  });
+  $('btnPrintPdf').addEventListener('click', () => {
+    const records = resolveExportRecords();
+    if (!records.length) { toast(t('exportEmpty'), 'err'); return; }
+    doPrintPdf(records);
+  });
+
+  // AI
+  $('btnAi').addEventListener('click', () => $('aiModal').classList.remove('hidden'));
+  $('btnLibrary').addEventListener('click', () => { renderLibraryModal(); $('libraryModal').classList.remove('hidden'); });
+  $('btnDoiImport').addEventListener('click', () => { $('doiImportStatus').classList.add('hidden'); $('doiModal').classList.remove('hidden'); });
+  $('btnDoiImportRun').addEventListener('click', () => { runDoiImport(); });
+  $('btnAddCollection').addEventListener('click', () => {
+    const name = $('inputNewCollection').value.trim();
+    if (!name) return;
+    if (!state.collections.includes(name)) state.collections.push(name);
+    state.activeCollection = name;
+    $('inputNewCollection').value = '';
+    persistLibrary(); renderLibraryModal();
+  });
+  $('selectCollection').addEventListener('change', (e) => { state.activeCollection = e.target.value; persistLibrary(); });
+  $('btnExportLibrary').addEventListener('click', () => {
+    if (!state.library.length) { toast(t('exportEmpty'), 'err'); return; }
+    const records = state.library.map((it) => it.record);
+    downloadZipBundle(records);
+  });
+  document.querySelectorAll('.ai-action').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      addAiMsg((LANG === 'ar' ? 'جارٍ التحليل...' : 'Analyzing...'), 'system');
+      await runAi(btn.dataset.ai);
+    });
+  });
+  $('btnAiSend').addEventListener('click', () => {
+    const v = $('aiInput').value.trim();
+    if (!v) return;
+    addAiMsg(v, 'user');
+    $('aiInput').value = '';
+    runAi('chat', v);
+  });
+  $('aiInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('btnAiSend').click(); });
+
+  // modal close
+  document.querySelectorAll('[data-close]').forEach((btn) => {
+    btn.addEventListener('click', () => $(btn.dataset.close).classList.add('hidden'));
+  });
+  document.querySelectorAll('.modal-backdrop').forEach((m) => {
+    m.addEventListener('click', (e) => { if (e.target === m) m.classList.add('hidden'); });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') document.querySelectorAll('.modal-backdrop:not(.hidden)').forEach((m) => m.classList.add('hidden'));
+  });
+}
+
+function init() {
+  loadUiPrefs();
+  loadSettings();
+  loadSaved();
+  applyI18n();
+  populateYears();
+  buildSourcesGrid();
+  renderSuggestions();
+  bindUi();
+  syncCoreHint();
+  refreshIps();
+  document.documentElement.dataset.theme = localStorage.getItem('am_theme') || 'light';
+  const ico = document.querySelector('#btnTheme .ico');
+  if (ico) ico.textContent = document.documentElement.dataset.theme === 'dark' ? '☀️' : '🌙';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const right = document.querySelector('.toolbar-right');
+  if (right && !document.getElementById('btnExport')) {
+    const b = document.createElement('button');
+    b.id = 'btnExport';
+    b.className = 'mini';
+    b.style.cssText = 'background:linear-gradient(135deg,#0e7490,#0b5c74);color:#fff;border:none;font-weight:700';
+    b.innerHTML = '⬇ <span data-i18n="export">' + t('export') + '</span>';
+    right.prepend(b);
+  }
+  init();
+});
+
+/* ================= STANDALONE (single-file) OVERRIDES ================= */
+function sSleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+function sUid(){ return 's' + Date.now().toString(36) + Math.random().toString(36).slice(2,8); }
+function sNormYear(v){ var m = String(v == null ? '' : v).match(/\d{4}/); return m ? parseInt(m[0],10) : null; }
+function sText(v){ if(v==null) return null; var s=String(v).trim(); return (s && s!=='NO_TITLE' && s!=='N/A') ? s : null; }
+function sClean(s){ if(!s) return null; return sText(s.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim()); }
+function sInvert(idx){ if(!idx) return null; var w=[]; Object.keys(idx).forEach(function(k){ idx[k].forEach(function(p){ w[p]=k; }); }); return sText(w.join(' ')); }
+function sRec(base, src){ var r = { id:sUid(), source:src, title:null, authors:[], year:null, venue:null, publisher:null, doi:null, url:null, pdfUrl:null, abstract:null, type:'other', volume:null, number:null, pages:null, citationCount:null, openAccess:null, language:null, keywords:[], isRetracted:false, isPreprint:false, countries:[], extra:{} }; for(var k in base) r[k]=base[k]; return r; }
+
+function sGetJson(url, timeoutMs, retries, headers) {
+  timeoutMs = timeoutMs || 15000; retries = retries || 0; headers = headers || {};
+  var attempt = 0, last;
+  function run() {
+    return new Promise(function(resolve, reject){
+      var ctrl = new AbortController();
+      var t = setTimeout(function(){ ctrl.abort(); }, timeoutMs);
+      var cfg = { signal: ctrl.signal, headers: Object.assign({ Accept: 'application/json' }, headers) };
+      fetch(url, cfg).then(function(res){
+        clearTimeout(t);
+        if (res.status === 429 || res.status === 500 || res.status === 503) { throw new Error('HTTP ' + res.status); }
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      }).then(resolve).catch(function(e){
+        clearTimeout(t);
+        if (attempt < retries && !(e && e.name === 'AbortError')) { attempt++; setTimeout(function(){ run().then(resolve, reject); }, 1500 * attempt); }
+        else reject(e);
+      });
+    });
+  }
+  return run();
+}
+
+/* ---------- direct API clients (browser side) ---------- */
+function sOpenAlex(q, from, to, limit, no) {
+  var u = 'https://api.openalex.org/works?search=' + encodeURIComponent(q) + '&per-page=' + limit + '&mailto=research-platform@example.org&sort=relevance_score:desc';
+  var parts = [];
+  if (from) parts.push('from_publication_date:' + from + '-01-01');
+  if (to) parts.push('to_publication_date:' + to + '-12-31');
+  if (state.filters && state.filters.libyaAffil) parts.push('authorships.institutions.country_code:LY');
+  if (parts.length) u += '&filter=' + parts.join(',');
+  return sGetJson(u).then(function(data){
+    return (data.results || []).map(function(w){
+      var src = w.primary_location && w.primary_location.source;
+      var pdf = (w.best_oa_location && w.best_oa_location.pdf_url) || null;
+      var countries = [];
+      (w.authorships || []).forEach(function(a){ (a.institutions || []).forEach(function(ins){ if (ins.country_code && countries.indexOf(ins.country_code) === -1) countries.push(ins.country_code); }); });
+      return sRec({
+        title: sText(w.display_name),
+        authors: (w.authorships || []).map(function(a){ return a.author && a.author.display_name; }).filter(Boolean),
+        year: sNormYear(w.publication_year),
+        venue: (src && src.display_name) || null,
+        publisher: src ? (src.host_organization_name || null) : null,
+        doi: w.doi ? w.doi.replace(/^https?:\/\/doi\.org\//i, '') : null,
+        url: (w.primary_location && w.primary_location.landing_page_url) || null,
+        pdfUrl: pdf,
+        abstract: sInvert(w.abstract_inverted_index),
+        type: w.type || 'other',
+        citationCount: w.cited_by_count || 0,
+        openAccess: !!(w.open_access && w.open_access.is_oa),
+        language: w.language || null,
+        keywords: (w.keywords || []).map(function(k){ return k.display_name; }).slice(0,8),
+        isRetracted: !!w.is_retracted,
+        isPreprint: /preprint/i.test(w.type || '') || (w.primary_location && w.primary_location.version === 'submittedVersion'),
+        countries: countries,
+      }, 'openalex');
+    });
+  });
+}
+function crossrefItemToRec(it) {
+  var authors = [];
+  (it.author || []).forEach(function(a){ var n = [a.given, a.family].filter(Boolean).join(' ') || a.name; if (n) authors.push(n.trim()); });
+  var issued = (it.issued && it.issued['date-parts'] && it.issued['date-parts'][0] && it.issued['date-parts'][0][0]) || null;
+  var pdf = null;
+  if (Array.isArray(it.link)) { var p = it.link.find(function(l){ return l && /pdf/i.test(l['content-type'] || ''); }); if (p) pdf = p.URL; }
+  var retracted = Array.isArray(it['update-to']) && it['update-to'].some(function(u2){ return /retract/i.test(u2.type || ''); });
+  return sRec({
+    title: sText(it.title && it.title[0]),
+    authors: authors,
+    year: sNormYear(issued),
+    venue: sText(it['container-title'] && it['container-title'][0]),
+    publisher: sText(it.publisher),
+    doi: sText(it.DOI),
+    url: (it.resource && it.resource.primary && it.resource.primary.URL) || it.URL || (it.DOI ? 'https://doi.org/' + it.DOI : null),
+    pdfUrl: pdf,
+    abstract: sClean(it.abstract),
+    type: it.type || 'other',
+    volume: sText(it.volume), number: sText(it.issue), pages: sText(it.page),
+    citationCount: it['is-referenced-by-count'] || 0,
+    openAccess: it.license ? it.license.length > 0 : null,
+    isRetracted: retracted,
+    isPreprint: /preprint|posted-content/i.test(it.type || ''),
+  }, 'crossref');
+}
+function sCrossref(q, from, to, limit) {
+  var u = 'https://api.crossref.org/works?query.bibliographic=' + encodeURIComponent(q) + '&rows=' + limit + '&mailto=research-platform@example.org&select=DOI,title,author,issued,container-title,abstract,publisher,URL,type,volume,issue,page,is-referenced-by-count,link,resource,update-to,subtype';
+  var flt = [];
+  if (from) flt.push('from-pub-date:' + from + '-01-01');
+  if (to) flt.push('until-pub-date:' + to + '-12-31');
+  if (flt.length) u += '&filter=' + encodeURIComponent(flt.join(','));
+  return sGetJson(u).then(function(data){
+    return (data.message && data.message.items || []).map(crossrefItemToRec);
+  });
+}
+function sSemantic(q, from, to, limit, key) {
+  var u = 'https://api.semanticscholar.org/graph/v1/paper/search?query=' + encodeURIComponent(q) + '&limit=' + limit;
+  if (from && to) u += '&year=' + from + '-' + to;
+  u += '&fields=title,abstract,authors,year,venue,externalIds,url,openAccessPdf,publicationTypes,citationCount';
+  var h = key ? { 'x-api-key': key } : {};
+  return sGetJson(u, 20000, 3, h).then(function(data){
+    return (data.data || []).map(function(p){
+      return sRec({
+        title: sText(p.title),
+        authors: (p.authors || []).map(function(a){ return a.name; }).filter(Boolean),
+        year: p.year ? parseInt(p.year, 10) : null,
+        venue: sText(p.venue),
+        doi: (p.externalIds && p.externalIds.DOI) || null,
+        url: p.url || null,
+        pdfUrl: (p.openAccessPdf && p.openAccessPdf.url) || null,
+        abstract: sClean(p.abstract),
+        type: (p.publicationTypes && p.publicationTypes[0]) || 'paper',
+        citationCount: p.citationCount || 0,
+        openAccess: !!p.openAccessPdf,
+      }, 'semantic');
+    });
+  });
+}
+function sPubmed(q, from, to, limit) {
+  var term = q + '[All Fields]';
+  if (from || to) term += ' AND ' + (from || 1800) + ':' + (to || 3000) + '[dp]';
+  var esUrl = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=' + encodeURIComponent(term) + '&retmax=' + limit + '&retmode=json&sort=relevance';
+  return sGetJson(esUrl).then(function(es){
+    var ids = (es.esearchresult && es.esearchresult.idlist) || [];
+    if (!ids.length) return [];
+    var smUrl = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=' + ids.join(',') + '&retmode=json';
+    return sGetJson(smUrl).then(function(sm){
+      var res = sm.result || {}; var out = [];
+      (res.uids || []).forEach(function(uid){
+        var r = res[uid]; if (!r) return;
+        var doi = null, pmc = null;
+        (r.articleids || []).forEach(function(a){ if (a.idtype === 'doi') doi = a.value; if (a.idtype === 'pmc') pmc = a.value; });
+        out.push(sRec({
+          title: sText(r.title),
+          authors: (r.authors || []).map(function(a){ return a.name; }).filter(Boolean),
+          year: sNormYear(r.pubdate),
+          venue: sText(r.fulljournalname) || sText(r.source),
+          doi: doi,
+          url: 'https://pubmed.ncbi.nlm.nih.gov/' + uid + '/',
+          pdfUrl: pmc ? 'https://www.ncbi.nlm.nih.gov/pmc/articles/' + pmc + '/' : null,
+          type: 'article',
+          volume: sText(r.volume), number: sText(r.issue), pages: sText(r.pages),
+          openAccess: (r.articleids || []).some(function(a){ return a.idtype === 'pmc'; }),
+          extra: { pmid: uid, pmc: pmc },
+        }, 'pubmed'));
+      });
+      return out;
+    });
+  });
+}
+function sDoaj(q, from, to, limit) {
+  var out = [];
+  function okYr(y){ return (!from || (y && y >= from)) && (!to || (y && y <= to)); }
+  var u = 'https://doaj.org/api/search/articles/' + encodeURIComponent(q) + '?pageSize=' + limit;
+  return sGetJson(u).then(function(data){
+    var rows = data.results || [];
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i];
+      var b = r.bibjson || {};
+      var landing = null, pdf = null;
+      var links = (Array.isArray(b.link) ? b.link : []).filter(function(l){ return l && l.url; });
+      links.forEach(function(l){ if (/pdf/i.test(l.type || '')) { pdf = l.url; } else if (!landing) { landing = l.url; } });
+      var year = sNormYear(b.year);
+      if (!okYr(year)) { continue; }
+      var authors = (b.author || []).map(function(a){ return (a && (a.name || [a.givenname, a.familyname].filter(Boolean).join(' '))) || null; }).filter(Boolean);
+      out.push(sRec({
+        title: sText(b.title),
+        authors: authors,
+        year: year,
+        venue: b.journal ? sText(b.journal.title) : null,
+        publisher: b.journal ? b.journal.publisher : null,
+        doi: sText(b.doi),
+        url: landing || (b.identifier && b.identifier.identifierurl) || (b.doi ? 'https://doi.org/' + b.doi : null),
+        pdfUrl: pdf,
+        abstract: sClean(b.abstract),
+        type: 'article',
+        volume: sText(b.journal && b.journal.volume),
+        number: sText(b.journal && b.journal.number),
+        pages: sText(b.start_page ? b.start_page + (b.end_page ? '-' + b.end_page : '') : null),
+        openAccess: true,
+        keywords: Array.isArray(b.keywords) ? b.keywords : []
+      }, 'doaj'));
+    }
+    return out;
+  });
+}
+function sArxiv(q, from, to, limit) {
+  var query = q.replace(/[()]/g, ' ').replace(/\s+/g, '+');
+  if (from && to) query += '+AND+submittedDate:[' + from + '01010000+TO+' + to + '12312359]';
+  var u = 'https://export.arxiv.org/api/query?search_query=all:' + query + '&start=0&max_results=' + limit;
+  return fetch(u, { headers: { Accept: 'application/atom+xml' } }).then(function(res){ return res.text(); }).then(function(xml){
+    var out = [];
+    var re = /<entry[\s>][\s\S]*?<\/entry>/g, m;
+    while ((m = re.exec(xml))) {
+      var e = m[0];
+      function grab(tag){ var mm = e.match(new RegExp('<'+tag+'[^>]*>([\\s\\S]*?)</'+tag+'>')); return mm ? mm[1].trim() : null; }
+      var authors = []; var nm;
+      var nr = /<author[\s>][\s\S]*?<name[^>]*>([\s\S]*?)<\/name>[\s\S]*?<\/author>/g;
+      while ((nm = nr.exec(e))) authors.push(nm[1].trim());
+      var id = grab('id');
+      var doiM = e.match(/<arxiv:doi[^>]*>([^<]+)</);
+      out.push(sRec({
+        title: sText(grab('title')), authors: authors, year: sNormYear(grab('published')),
+        venue: 'arXiv', publisher: 'arXiv', doi: doiM ? doiM[1] : null,
+        url: id, pdfUrl: id ? id.replace('/abs/', '/pdf/') + '.pdf' : null,
+        abstract: sText(grab('summary')), type: 'preprint', openAccess: true,
+      }, 'arxiv'));
+    }
+    return out;
+  });
+}
+function sCore(q, from, to, limit, key) {
+  if (!key) return Promise.reject(new Error('needs_key'));
+  var u = 'https://api.core.ac.uk/v3/search/works?q=' + encodeURIComponent(q) + '&limit=' + limit;
+  return sGetJson(u, 15000, 0, { Authorization: 'Bearer ' + key }).then(function(data){
+    return (data.results || []).map(function(r){
+      return sRec({
+        title: sText(r.title),
+        authors: (r.authors || []).map(function(a){ return a.name; }).filter(Boolean),
+        year: sNormYear(r.yearPublished), venue: sText(r.journalName), publisher: sText(r.publisher),
+        doi: sText(r.doi), url: r.downloadUrl || r.landingPageUrl || (r.doi ? 'https://doi.org/' + r.doi : null),
+        pdfUrl: r.downloadUrl || null, abstract: sClean(r.abstract), type: r.documentType || 'other', openAccess: true,
+      }, 'core');
+    });
+  });
+}
+
+/* ---------- direct search orchestrator ---------- */
+/* Standalone override: test the CORE key straight from the browser. */
+async function testCoreKey() {
+  var btn = $('btnTestCore');
+  var st = $('coreKeyStatus');
+  var key = $('setCoreKey').value.trim();
+  if (!key) { st.textContent = t('keyBad'); st.className = 'key-status bad'; return; }
+  btn.disabled = true;
+  var prev = btn.textContent;
+  btn.textContent = t('testingKey');
+  st.textContent = '';
+  try {
+    var ok = false;
+    try {
+      var u = 'https://api.core.ac.uk/v3/search/works?q=' + encodeURIComponent('open access') + '&limit=1';
+      var d = await sGetJson(u, 20000, 1, { Authorization: 'Bearer ' + key });
+      ok = Array.isArray(d.results);
+    } catch (e) { ok = false; }
+    st.textContent = ok ? t('keyOk') : t('keyBad');
+    st.className = 'key-status ' + (ok ? 'ok' : 'bad');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = prev;
+  }
+}
+
+var sClients = {
+  openalex: sOpenAlex, crossref: sCrossref, semantic: sSemantic, pubmed: sPubmed,
+  arxiv: sArxiv, doaj: sDoaj, core: sCore
+};
+
+function hasArabic(s) { return /[\u0600-\u06FF]/.test(String(s || '')); }
+async function maybeTranslateQuery(q) {
+  if (!state.ai.key || !hasArabic(q)) return null;
+  try {
+    var sys = 'You are an academic search-query translator. Output ONLY the best short English academic search phrase (3-8 words) equivalent to the given Arabic research topic — no quotes, no explanation, no punctuation beyond spaces.';
+    var out = await askRemote(sys, q);
+    out = String(out || '').trim().replace(/^["'\u201c\u201d]+|["'\u201c\u201d]+$/g, '').split('\n')[0].trim();
+    if (out && out.toLowerCase() !== q.toLowerCase() && out.length < 120) return out;
+  } catch (e) { /* silent — bilingual expansion is a bonus, not required */ }
+  return null;
+}
+function dedupeRecords(arr) {
+  var seen = new Set(); var out = [];
+  arr.forEach(function(r){
+    var key = r.doi ? 'doi:' + String(r.doi).toLowerCase() : (r.source + '|' + String(r.title || '').toLowerCase().replace(/[^a-z0-9\u0600-\u06FF]+/g, '').slice(0, 80));
+    if (seen.has(key)) return;
+    seen.add(key); out.push(r);
+  });
+  return out;
+}
+
+async function doSearch() {
+  var q = $('inputQ').value.trim();
+  if (!q) { toast(LANG === 'ar' ? 'أدخل موضوع البحث أولاً' : 'Enter a topic first', 'err'); $('inputQ').focus(); return; }
+  if (!checkYears()) return;
+  var from = $('selectFrom').value, to = $('selectTo').value;
+  var apiSources = [...state.checked].filter(function(id){ return SRC_META[id] && SRC_META[id].api; });
+  var externalIDs = [...state.checked].filter(function(id){ return SRC_META[id] && !SRC_META[id].api; });
+
+  state.q = q; state.from = from; state.to = to;
+  state.selected.clear();
+  state.filters.source = null; state.filters.concept = null;
+  var token = ++state.activeSearch;
+
+  $('loading').classList.remove('hidden');
+  $('empty').classList.add('hidden');
+  $('statusBar').classList.add('hidden');
+  $('resultsToolbar').classList.add('hidden');
+  $('resultsList').innerHTML = '';
+  $('externalBlock').classList.add('hidden');
+
+  var sep = apiSources.length + 3; // small stagger to be polite to rate limits
+  var translatedQ = await maybeTranslateQuery(q);
+  if (token !== state.activeSearch) return;
+  var jobs = apiSources.map(function(id, i){
+    return sClients[id](q, from, to, state.limit, state.semanticKey).then(function(results){
+      return { id: id, results: results, ok: true, error: null };
+    }).catch(function(e){
+      var msg = (e && e.message) || '';
+      if (msg === 'Failed to fetch' || msg === 'NetworkError when attempting to fetch resource.' || e instanceof TypeError) msg = 'CORS';
+      return { id: id, results: [], ok: false, error: msg };
+    });
+  });
+  var bilingualJobs = translatedQ ? apiSources.map(function(id){
+    return sClients[id](translatedQ, from, to, Math.max(5, Math.round(state.limit / 2)), state.semanticKey).then(function(results){
+      return { id: id, results: results, ok: true, error: null };
+    }).catch(function(){ return { id: id, results: [], ok: false, error: null }; });
+  }) : [];
+
+  try {
+    var settled = await Promise.all(jobs);
+    var settledBi = bilingualJobs.length ? await Promise.all(bilingualJobs) : [];
+    if (token !== state.activeSearch) return;
+    var results = []; var sources = []; var errors = {};
+    var biBySource = {};
+    settledBi.forEach(function(s){ biBySource[s.id] = (biBySource[s.id] || 0) + (s.ok ? s.results.length : 0); });
+    settled.forEach(function(s){
+      sources.push({ id: s.id, count: s.results.length + (biBySource[s.id] || 0), ok: s.ok, external: false });
+      if (s.ok) results = results.concat(s.results);
+      else if (s.error) { errors[s.id] = s.error; if (s.error === 'needs_key') sources[sources.length-1].ok = true; }
+    });
+    var biCount = 0;
+    settledBi.forEach(function(s){ if (s.ok) { results = results.concat(s.results); biCount += s.results.length; } });
+    results = dedupeRecords(results);
+    state.bilingual = translatedQ ? { query: translatedQ, added: biCount } : null;
+    (externalIDs || []).forEach(function(id){ sources.push({ id: id, count: 0, ok: true, external: true }); });
+    state.results = results; state.sources = sources; state.errors = errors;
+    state.externalList = externalIDs.map(function(id){ return { id: id, url: extGuess(id, q) }; });
+
+    $('statusBar').classList.remove('hidden');
+    $('statusMsg').innerHTML = (state.results.length
+      ? (LANG === 'ar' ? 'تم العثور على ' + state.results.length + ' نتيجة من ' : 'Found ' + state.results.length + ' records from ') + state.sources.filter(function(s){ return s.count > 0; }).length + ' ' + t('sourcesPlural') + ' "' + esc(q) + '"'
+      : t('noResults'))
+      + (state.bilingual ? ('<div class="bilingual-note">🌐 ' + (LANG === 'ar' ? 'تم توسيع البحث تلقائياً بالمكافئ الإنجليزي: ' : 'Auto-expanded with the English equivalent: ') + '“' + esc(state.bilingual.query) + '”' + (LANG === 'ar' ? ' — أضاف ذلك نتائج إضافية.' : ' — this added extra results.') + '</div>') : '');
+    $('perSource').innerHTML = state.sources.map(function(s){
+      var cls = s.ok ? (s.count ? 'dot' : 'dot zero') : 'dot bad';
+      var active = state.filters.source === s.id ? ' active-filter' : '';
+      var clickable = s.count ? ' data-srcfilter="' + esc(s.id) + '" title="' + esc(t('clickToFilterSource')) + '"' : '';
+      return '<span class="ps' + active + '"' + clickable + '><span class="' + cls + '"></span>' + esc(resultSortLabel(s.id)) + ': ' + s.count + '</span>';
+    }).join('');
+    var errEntries = Object.entries(state.errors);
+    if (errEntries.length) {
+      var hint = function(id, m){ if (m === 'HTTP 429') return '<small style="color:var(--text2)"> (' + t('tooltip429Rate') + ')</small>'; if (m === 'CORS') return '<small style="color:var(--text2)"> (' + (LANG === 'ar' ? 'المتصفح يمنع الاتصال المباشر' : 'browser blocks direct call') + ')</small>'; if (m === 'needs_key') return '<small style="color:var(--text2)"> 🔑</small>'; return ''; };
+      $('perSource').innerHTML += '<span class="ps">' + t('errorSources') + '</span> ' + errEntries.map(function(ee){ return '<span class="ps"><span class="dot bad"></span>' + esc(resultSortLabel(ee[0])) + ': ❌' + hint(ee[0], ee[1]) + '</span>'; }).join('');
+    }
+    $('perSource').querySelectorAll('[data-srcfilter]').forEach(function(el){
+      el.addEventListener('click', function(){
+        state.filters.source = (state.filters.source === el.dataset.srcfilter) ? null : el.dataset.srcfilter;
+        renderResults();
+        var ps = $('perSource').querySelectorAll('.ps');
+        ps.forEach(function(p){ p.classList.remove('active-filter'); });
+        if (state.filters.source && el.parentElement) el.classList.add('active-filter');
+      });
+    });
+    if (state.results.length) $('resultsToolbar').classList.remove('hidden');
+    if (!state.results.length) { $('empty').classList.remove('hidden'); $('emptyTxt').innerHTML = '<b>' + t('noResults') + '</b><br>' + t('tryAgain'); }
+    renderResults();
+    renderExternalLinks();
+  } catch(e) {
+    if (token !== state.activeSearch) return;
+    $('empty').classList.remove('hidden');
+    $('emptyTxt').textContent = String(e.message || e);
+  } finally {
+    if (token === state.activeSearch) $('loading').classList.add('hidden');
+  }
+}
+
+/* ---------- direct AI (CORS-friendly providers only) ---------- */
+async function askRemote(system, user) {
+  var base = String(state.ai.base || 'https://api.openai.com/v1').replace(/\/$/, '');
+  var res;
+  try {
+    res = await fetch(base + '/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + state.ai.key },
+      body: JSON.stringify({ model: state.ai.model, messages: [{ role: 'system', content: system }, { role: 'user', content: user }], temperature: 0.4 }),
+    });
+  } catch (e) {
+    throw new Error('CORS');
+  }
+  var text = await res.text();
+  var data; try { data = JSON.parse(text); } catch(e){ data = null; }
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  return (data && data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || '';
+}
+
+/* ---------- IP display (no server) ---------- */
+async function refreshIps() {
+  $('localUrl').textContent = LANG === 'ar' ? 'هذا الملف (بدون خادم)' : 'this file (no server)';
+  $('netUrl').textContent = '';
+}
+
+/* ---------- offline badge + hash quick-search ---------- */
+function sStandaloneInit() {
+  var badge = document.createElement('div');
+  badge.style.cssText = 'display:inline-block;background:rgba(14,116,144,.1);color:var(--primary);border:1px solid rgba(14,116,144,.3);border-radius:40px;padding:3px 14px;font-size:11.5px;margin-top:12px';
+  badge.textContent = LANG === 'ar' ? 'النسخة الاحترافية — اشتراك فعّال' : 'PRO edition — active subscription';
+  var hero = document.querySelector('.hero');
+  if (hero) hero.appendChild(badge);
+  var m;
+  if (location.hash && (m = location.hash.match(/^#q=([^|]*)(?:\|([0-9]{4})(?:\|([0-9]{4}))?)?/))) {
+    if (m[1]) { try { $('inputQ').value = decodeURIComponent(m[1]); } catch (e) { /* malformed link: ignore */ } }
+    if (m[2]) $('selectFrom').value = m[2];
+    if (m[3]) $('selectTo').value = m[3];
+    setTimeout(function(){ doSearch(); }, 400);
+  }
+}
+document.addEventListener('DOMContentLoaded', sStandaloneInit);
+
+
+/* ===================================================================== */
+/*  PRO EDITION — appended by tools/build-pro.py (not present in the free build) */
+/* ===================================================================== */
+(function proEdition() {
+  var U = window.AM_USER || {};
+  var AR = function () { return LANG === 'ar'; };
+  var JSON_HDR = { 'Content-Type': 'application/json' };
+
+  function gotoAccount(reason) { location.href = '/?need=' + reason; }
+
+  /* ---- 1) Built-in AI: same-origin proxy, no user key needed ---- */
+  var _loadSettings = loadSettings;
+  loadSettings = function () { _loadSettings(); state.ai.key = 'server'; };
+  askRemote = async function (system, user) {
+    var kind = /search-query translator/.test(system || '') ? 'translate' : 'chat';
+    var res;
+    try {
+      res = await fetch('/api/ai', { method: 'POST', headers: JSON_HDR, credentials: 'same-origin',
+        body: JSON.stringify({ system: system, user: user, kind: kind }) });
+    } catch (e) { throw new Error(AR() ? 'تعذّر الاتصال بالخادم' : 'Cannot reach the server'); }
+    var data = null; try { data = await res.json(); } catch (e) { /* empty */ }
+    if (res.status === 401) { gotoAccount('login'); throw new Error(AR() ? 'انتهت الجلسة' : 'Session expired'); }
+    if (res.status === 402) { gotoAccount('pro'); throw new Error(AR() ? 'الاشتراك غير فعّال' : 'Subscription inactive'); }
+    if (res.status === 429) {
+      throw new Error(AR() ? 'بلغت حدّك اليومي من طلبات الذكاء الاصطناعي (' + (data && data.limit) + ')، يتجدد غدًا.'
+        : 'Daily AI limit reached (' + (data && data.limit) + '); it resets tomorrow.');
+    }
+    if (!res.ok) throw new Error(AR() ? 'تعذّر الحصول على رد الذكاء الاصطناعي، حاول لاحقًا.' : 'AI is unavailable right now, try again later.');
+    return (data && data.content) || '';
+  };
+
+  /* ---- 2) Cloud library sync (optimistic concurrency: stale saves get a 409 and are merged by item key) ---- */
+  var timer = null;
+  function badge(txt) { var b = document.getElementById('proSync'); if (b) b.textContent = txt; }
+  function libPayload() { return JSON.stringify({ data: { library: state.library, collections: state.collections } }); }
+  function mergeLib(a, b) {
+    var m = new Map();
+    a.concat(b).forEach(function (it) {
+      var o = m.get(it.key);
+      if (!o || (it.savedAt || 0) > (o.savedAt || 0) || (!o.note && it.note)) m.set(it.key, it);
+    });
+    return Array.from(m.values());
+  }
+  var OWNER_KEY = 'am_lib_owner';
+  var LOCAL_KEYS = ['am_library', 'am_collections', 'am_saved', 'am_settings', 'am_lib_dirty', 'am_lib_synced_at', OWNER_KEY];
+  function wipeLocal() { LOCAL_KEYS.forEach(function (k) { try { localStorage.removeItem(k); } catch (e) { /* ignore */ } }); }
+  function syncedBadge() { badge('☁️ ' + (AR() ? 'متزامن' : 'Synced')); }
+  function failedBadge() { badge('⚠️ ' + (AR() ? 'تعذّرت المزامنة' : 'Sync failed')); }
+  function mergeFromServer(data, updatedAt) {
+    state.library = mergeLib(state.library, (data && data.library) || []);
+    state.collections = Array.from(new Set(state.collections.concat((data && data.collections) || [])));
+    state.saved = new Set(state.library.map(function (x) { return x.key; }));
+    _persist(); localStorage.setItem('am_lib_synced_at', updatedAt);
+  }
+  /* The server rejects a save built on an outdated copy (409). We then merge by item key instead of overwriting the other device's work. */
+  async function push(depth) {
+    depth = depth || 0;
+    try {
+      var base = localStorage.getItem('am_lib_synced_at') || null;
+      var r = await fetch('/api/library', { method: 'PUT', headers: JSON_HDR, credentials: 'same-origin',
+        body: JSON.stringify({ data: { library: state.library, collections: state.collections }, base: base }) });
+      if (r.status === 401) return gotoAccount('login');
+      if (r.status === 402) return gotoAccount('pro');
+      if (r.status === 409 && depth < 2) {
+        var c = await r.json();
+        mergeFromServer(c.data, c.updatedAt); renderResults();
+        return push(depth + 1);
+      }
+      if (r.status === 413) { badge('⚠️ ' + (AR() ? 'المكتبة أكبر من حدّ المزامنة' : 'Library too large to sync')); return; }
+      if (!r.ok) throw new Error('http ' + r.status);
+      var j = await r.json();
+      localStorage.setItem('am_lib_synced_at', j.updatedAt); localStorage.removeItem('am_lib_dirty');
+      localStorage.setItem(OWNER_KEY, U.email || '');
+      syncedBadge();
+    } catch (e) { failedBadge(); }
+  }
+  var _persist = persistLibrary;
+  persistLibrary = function () {
+    _persist();
+    localStorage.setItem('am_lib_dirty', '1');
+    clearTimeout(timer); timer = setTimeout(push, 1500); badge('☁️ …');
+  };
+  async function pull() {
+    try {
+      var r = await fetch('/api/library', { credentials: 'same-origin' });
+      if (r.status === 401) return gotoAccount('login');
+      if (r.status === 402) return gotoAccount('pro');
+      if (!r.ok) throw new Error('http ' + r.status);
+      var j = await r.json();
+      var owner = localStorage.getItem(OWNER_KEY);
+      if (owner && U.email && owner !== U.email) {
+        // another subscriber used this browser before: never carry their library or keys into this account
+        wipeLocal(); state.library = []; state.collections = [AR() ? 'عام' : 'General'];
+        state.activeCollection = state.collections[0]; state.saved = new Set(); _persist(); owner = null;
+      }
+      var dirty = localStorage.getItem('am_lib_dirty') === '1';
+      var firstSync = !owner && state.library.length > 0;   // a local (e.g. free-edition) library meets this account for the first time: merge, don't replace
+      if (!j.data) {
+        if (state.library.length) await push(); else { localStorage.setItem(OWNER_KEY, U.email || ''); syncedBadge(); }
+        renderResults(); return;
+      }
+      if (dirty || firstSync) {
+        if (j.updatedAt !== localStorage.getItem('am_lib_synced_at')) {
+          state.library = mergeLib(state.library, j.data.library);
+          state.collections = Array.from(new Set(state.collections.concat(j.data.collections)));
+        }
+        state.saved = new Set(state.library.map(function (x) { return x.key; }));
+        _persist(); await push(); renderResults(); return;
+      }
+      state.library = j.data.library; state.collections = j.data.collections;
+      if (!state.collections.length) state.collections = [AR() ? 'عام' : 'General'];
+      if (state.collections.indexOf(state.activeCollection) < 0) state.activeCollection = state.collections[0];
+      state.saved = new Set(state.library.map(function (x) { return x.key; }));
+      _persist(); localStorage.setItem('am_lib_synced_at', j.updatedAt); localStorage.setItem(OWNER_KEY, U.email || '');
+      syncedBadge(); renderResults();
+    } catch (e) { failedBadge(); }
+  }
+
+  /* ---- 3) Branded (per-subscriber) letterhead instead of the university logos ---- */
+  letterheadHtml = function () {
+    var inst = U.institution || (AR() ? 'عين المصدر' : 'Ain Al-Masdar');
+    return '<div class="letterhead"><div class="letterhead-txt"><b>' + esc(inst) + '</b>' +
+      (U.name ? '<span>' + esc(U.name) + '</span><br>' : '') + esc(t('brandName')) + ' — Ain Al-Masdar PRO</div></div>';
+  };
+
+  /* ---- 4) PRO-only tools inside "My Library" ---- */
+  function collectionItems() {
+    return state.library.filter(function (it) { return (it.collection || state.collections[0]) === state.activeCollection; });
+  }
+  function noteSystem() {
+    return AR() ? 'أنت مساعد أكاديمي. اكتب ملاحظة موجزة (2-3 أسطر) بالعربية تشرح أهمية هذا المرجع وفائدته المحتملة للباحث، بالاعتماد فقط على المعلومات المعطاة.'
+      : "You are an academic assistant. Write a concise 2-3 line note explaining this reference's relevance and potential use, based only on the given info.";
+  }
+  async function annotateAll(btn) {
+    var todo = state.library.filter(function (it) { return !it.note; });
+    if (!todo.length) { toast(AR() ? 'كل المراجع لديها ملاحظات بالفعل' : 'All references already have notes'); return; }
+    var label = btn.textContent; btn.disabled = true;
+    var done = 0;
+    try {
+      for (var i = 0; i < todo.length; i++) {
+        btn.textContent = '⏳ ' + (i + 1) + '/' + todo.length;
+        var r = todo[i].record;
+        var user = (r.title || '') + '\n' + (r.authors || []).join(', ') + '\n' + (r.year || '') + ' ' + (r.venue || '') + '\n' + (r.abstract ? r.abstract.slice(0, 600) : '');
+        todo[i].note = String(await askRemote(noteSystem(), user) || '').trim();
+        done++; persistLibrary();
+      }
+      toast((AR() ? 'تمت إضافة ' : 'Added ') + done + (AR() ? ' ملاحظة' : ' notes'), 'ok');
+    } catch (e) { toast(e.message, 'err'); }
+    finally { btn.disabled = false; btn.textContent = label; renderLibraryModal(); }
+  }
+
+  function litModal() {
+    var m = document.getElementById('litModal');
+    if (m) return m;
+    m = document.createElement('div'); m.className = 'modal-backdrop hidden'; m.id = 'litModal';
+    m.innerHTML = '<div class="modal ai-modal"><div class="modal-head"><h3>' + (AR() ? 'مسودة مراجعة الأدبيات' : 'Literature review draft') + '</h3>' +
+      '<button class="modal-close" data-close="litModal">✕</button></div><div class="modal-body">' +
+      '<p class="zip-hint">' + (AR() ? 'مسودة أولية يولّدها الذكاء الاصطناعي من مراجعك المحفوظة فقط. راجعها وعدّلها؛ وتأكد من صحة كل استشهاد قبل اعتمادها.' : 'An AI first draft built only from your saved references. Review and edit it, and verify every citation before use.') + '</p>' +
+      '<textarea id="litText" rows="16" style="width:100%;font-family:var(--font);border:1px solid var(--border);border-radius:10px;padding:10px;background:var(--bg);color:var(--text);font-size:13.5px;line-height:1.9"></textarea>' +
+      '<div class="modal-actions"><button class="btn-primary" id="litCopy">' + (AR() ? 'نسخ' : 'Copy') + '</button>' +
+      '<button class="btn-primary" id="litDoc">' + (AR() ? 'تنزيل Word' : 'Download Word') + '</button>' +
+      '<button class="btn-ghost" data-close="litModal">' + (AR() ? 'إغلاق' : 'Close') + '</button></div></div></div>';
+    document.body.appendChild(m);
+    m.querySelectorAll('[data-close]').forEach(function (b) { b.addEventListener('click', function () { m.classList.add('hidden'); }); });
+    document.getElementById('litCopy').addEventListener('click', function () {
+      try { navigator.clipboard.writeText(document.getElementById('litText').value).then(function () { toast(AR() ? 'تم النسخ ✓' : 'Copied ✓', 'ok'); }); } catch (e) { /* ignore */ }
+    });
+    document.getElementById('litDoc').addEventListener('click', function () {
+      var txt = document.getElementById('litText').value;
+      var body = txt.split(/\n{2,}/).map(function (p) { return '<p>' + esc(p).replace(/\n/g, '<br>') + '</p>'; }).join('');
+      var html = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><style>body{font-family:Cairo,Tahoma,sans-serif;font-size:13px;line-height:1.9}.letterhead{text-align:center;border-bottom:2px solid #0e7490;padding-bottom:10px;margin-bottom:14px}.letterhead-txt b{display:block;font-size:15px}</style></head><body dir="' + (AR() ? 'rtl' : 'ltr') + '">' + letterheadHtml() + body + '</body></html>';
+      var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff', html], { type: 'application/msword' }));
+      a.download = 'literature-review.doc'; document.body.appendChild(a); a.click(); a.remove();
+    });
+    return m;
+  }
+  async function litReview(btn) {
+    var items = collectionItems().slice(0, 25);
+    if (items.length < 3) { toast(AR() ? 'احفظ 3 مراجع على الأقل في المجموعة الحالية أولًا' : 'Save at least 3 references in the current collection first', 'err'); return; }
+    var topic = window.prompt(AR() ? 'موضوع مراجعة الأدبيات:' : 'Literature review topic:', state.q || state.activeCollection || '');
+    if (!topic) return;
+    var label = btn.textContent; btn.disabled = true; btn.textContent = '⏳';
+    try {
+      var recs = items.map(function (it) { return it.record; });
+      var ctx = recs.map(function (r, i) {
+        return (i + 1) + '. ' + (r.authors || []).slice(0, 4).join(', ') + ' (' + (r.year || 'n.d.') + '). ' + (r.title || '') + '. ' + (r.venue || '') +
+          (r.abstract ? ' — ' + r.abstract.slice(0, 450) : '');
+      }).join('\n');
+      var sys = AR()
+        ? 'أنت باحث أكاديمي خبير. اكتب بالعربية الفصحى الأكاديمية. لا تخترع أي مرجع أو نتيجة أو رقم غير وارد في البيانات المعطاة، وإذا لم تكفِ المعلومات فاذكر ذلك صراحة.'
+        : 'You are an expert academic researcher. Do not invent any reference, finding or number that is not in the provided data; if information is insufficient, say so explicitly.';
+      var user = (AR()
+        ? 'اكتب مسودة مراجعة أدبيات منظمة (700-1000 كلمة) حول: "' + topic + '"، مقسّمة إلى محاور موضوعية بعناوين فرعية، تقارن بين الدراسات وتبرز نقاط الاتفاق والاختلاف والفجوة البحثية، وتشير إلى المراجع بصيغة (المؤلف الأول، السنة) فقط، اعتمادًا حصريًا على المراجع التالية:\n\n'
+        : 'Write a structured literature review draft (700-1000 words) on: "' + topic + '", organised into thematic sections with subheadings, comparing studies, highlighting agreement, disagreement and the research gap, citing as (First author, year) only, based exclusively on these references:\n\n') + ctx;
+      var text = String(await askRemote(sys, user) || '').trim();
+      var refs = referencize(recs, state.style).join('\n\n');
+      litModal();
+      document.getElementById('litText').value = text + '\n\n' + (AR() ? 'المراجع' : 'References') + '\n\n' + refs;
+      document.getElementById('litModal').classList.remove('hidden');
+    } catch (e) { toast(e.message, 'err'); }
+    finally { btn.disabled = false; btn.textContent = label; }
+  }
+
+  /* ---- 5) UI wiring (runs after the app's own init) ---- */
+  document.addEventListener('DOMContentLoaded', function () {
+    var css = document.createElement('style');
+    css.textContent = '.ip-bar{display:none!important}.pro-pill{background:linear-gradient(135deg,#d97706,#f59e0b);color:#fff;font-size:11px;font-weight:800;border-radius:20px;padding:1px 9px;margin-inline-start:8px;vertical-align:middle}#proSync{font-size:12px;color:var(--text2);padding:0 6px;white-space:nowrap}.pro-note{background:rgba(5,150,105,.08);border:1px solid rgba(5,150,105,.25);color:var(--ok);border-radius:10px;padding:8px 12px;font-size:13px;margin-bottom:12px}';
+    document.head.appendChild(css);
+
+    var nm = document.querySelector('.brand-name');
+    if (nm) { var pill = document.createElement('span'); pill.className = 'pro-pill'; pill.textContent = 'PRO'; nm.appendChild(pill); }
+
+    var nav = document.querySelector('.top-actions');
+    if (nav) {
+      var sync = document.createElement('span'); sync.id = 'proSync'; sync.textContent = '☁️ …'; nav.insertBefore(sync, nav.firstChild);
+      var acc = document.createElement('button'); acc.className = 'ico-btn'; acc.title = AR() ? 'حسابي' : 'Account';
+      acc.innerHTML = '<span class="ico">👤</span><span class="lbl">' + (AR() ? 'حسابي' : 'Account') + '</span>';
+      acc.addEventListener('click', function () { location.href = '/'; });
+      var out = document.createElement('button'); out.className = 'ico-btn'; out.title = AR() ? 'خروج' : 'Sign out';
+      out.innerHTML = '<span class="ico">🚪</span><span class="lbl">' + (AR() ? 'خروج' : 'Sign out') + '</span>';
+      out.addEventListener('click', async function () {
+        if (localStorage.getItem('am_lib_dirty') === '1') await push();
+        if (localStorage.getItem('am_lib_dirty') === '1' && !confirm(AR() ? 'توجد تعديلات لم تُزامَن ولن تُحفظ إن خرجت الآن. هل تريد الخروج؟' : 'Some changes are not synced yet and will be lost. Sign out anyway?')) return;
+        try { await fetch('/api/auth/logout', { method: 'POST', headers: JSON_HDR, credentials: 'same-origin', body: '{}' }); } catch (e) { /* ignore */ }
+        wipeLocal();   // shared lab computers: the next person must not inherit this library or these keys
+        location.href = '/';
+      });
+      nav.appendChild(acc); nav.appendChild(out);
+    }
+
+    // AI is built in: hide the key/provider/model fields
+    var key = document.getElementById('setAiKey'), base = document.getElementById('setAiBase');
+    if (key && key.closest('.field')) {
+      var f = key.closest('.field');
+      var note = document.createElement('div'); note.className = 'pro-note';
+      note.textContent = AR() ? '✨ الذكاء الاصطناعي مدمج في اشتراكك — لا حاجة لأي مفتاح.' : '✨ AI is built into your subscription — no key needed.';
+      f.parentNode.insertBefore(note, f); f.style.display = 'none';
+    }
+    if (base && base.closest('.form-grid')) base.closest('.form-grid').style.display = 'none';
+
+    // PRO tools in the library toolbar
+    var tb = document.querySelector('#libraryModal .lib-toolbar');
+    if (tb) {
+      var b1 = document.createElement('button'); b1.className = 'mini'; b1.type = 'button';
+      b1.textContent = AR() ? '📝 مسودة مراجعة أدبيات' : '📝 Literature review draft';
+      b1.addEventListener('click', function () { litReview(b1); });
+      var b2 = document.createElement('button'); b2.className = 'mini'; b2.type = 'button';
+      b2.textContent = AR() ? '✨ ملاحظات لكل المراجع' : '✨ Notes for all references';
+      b2.addEventListener('click', function () { annotateAll(b2); });
+      tb.appendChild(b1); tb.appendChild(b2);
+    }
+    setTimeout(pull, 400);
+  });
+})();
+
+</script>
+</body>
+</html>
